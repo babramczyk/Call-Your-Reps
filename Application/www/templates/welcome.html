@@ -1,5 +1,89 @@
 <ion-view view-title="Welcome">
   <ion-content class="padding">
-    <h2>Welcome Page</h2>
+	
+	<br>
+
+	<!-- Welcome message -->    
+	<div style="float: middle;">
+	    <h3>Welcome to</h3>
+	    <h2>Call Your Reps</h2>
+    </div>
+    <br>
+
+	<!-- Returning Users Sign In -->    
+    <h3>New User? Sign up here.</h3>
+
+    <!-- First Name START -->
+    <div class="bottom">
+      <div style="float: left; width: 50%;">
+        <label class="item item-input">
+          <input type="text" name="firstName" id="firstName-textarea"
+                  ng-model="$parent.firstName" placeholder="First Name">
+        </label>
+      </div>
+      <!-- First Name END -->
+
+      <!-- Last Name START -->
+      <div style="float: left; width: 50%;">
+        <label class="item item-input">
+          <input type="text" name="lastName" id="lastName-textarea"
+                 ng-model="$parent.lastName" placeholder="Last Name">
+        </label>
+      </div>
+      <!-- Last Name END -->
+    </div>
+	
+	<!-- Email START -->
+	<div class="bottom"> 
+	  <div style="float: left; width: 100%;">
+        <label class="item item-input">
+          <input type="text" name="newEmail" id="newEmail-textarea"
+                 ng-model="$parent.newEmail" placeholder="Email">
+        </label>
+      </div>
+    </div>
+	<!-- Email END -->
+
+	<!-- Password START -->
+    <div class="bottom">  
+	  <div style="float: left; width: 100%;">
+        <label class="item item-input">
+          <input type="text" name="newPassword" id="newPassword-textarea"
+                 ng-model="$parent.newPassword" placeholder="Password">
+        </label>
+      </div>
+    </div>
+    <!-- Password END -->
+
+    <button class="button button-full" ng-click="signupEmail()">Sign Up</button>
+    <br>
+
+	<!-- New Users Sign Up -->    
+    <h3>Returning User? Sign in here.</h3>
+
+	<!-- Email START -->
+	<div class="bottom"> 
+	  <div style="float: left; width: 100%;">
+        <label class="item item-input">
+          <input type="text" name="userEmail" id="userEmail-textarea"
+                 ng-model="$parent.userEmail" placeholder="Email">
+        </label>
+      </div>
+    </div>
+	<!-- Email END -->
+
+	<!-- Password START -->
+    <div class="bottom">  
+	  <div style="float: left; width: 100%;">
+        <label class="item item-input">
+          <input type="text" name="userPassword" id="userPassword-textarea"
+                 ng-model="$parent.userPassword" placeholder="Password">
+        </label>
+      </div>
+    </div>
+    <!-- Password END -->
+
+    <button class="button button-full" ng-click="loginEmail()">Sign In</button>
+
   </ion-content>
 </ion-view>
