@@ -1,1 +1,7 @@
-/* Empty. Add your own CSS if you like */
+.float-right { float: right; }
+.center { margin: 20% auto; width: auto; }
+button.center { display: block; }
+
+ion-view#home-page h3 {
+    margin: 10% 5%;
+}
