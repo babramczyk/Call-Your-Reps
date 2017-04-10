@@ -1,6 +1,46 @@
-<ion-view view-title="Home">
+<ion-view view-title="Your Representatives" id="home-page">
   <ion-content class="padding">
-    <h2>Home Page / Representative List</h2>
+  
+    <!-- TODO: Possibly revise styling if we have no more information to put in each card. Currently, a lot of wasted space -->
+  
+    <div class="card">
+      <div class="item item-divider">
+        House of Representatives
+      </div>
+      <div class="item item-text-wrap" ng-repeat="rep in senateReps">
+      
+        <div class="float-left width-75">
+          <p><strong>{{ rep.name }}</strong>
+          <p>{{ rep.district }}
+        </div>
+        <div class="float-right width-25">
+          <button class="button button-balanced icon ion-ios-telephone button-contact float-right"></button>
+          <button class="button button-positive icon ion-ios-information button-info float-right"></button>
+        </div>
+        <div class="clear-both"></div>
+    
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="item item-divider">
+        House of Representatives
+      </div>
+      <div class="item item-text-wrap" ng-repeat="rep in houseReps">
+        
+        <div class="float-left width-75">
+          <p><strong>{{ rep.name }}</strong>
+          <p>{{ rep.district }}
+        </div>
+        <div class="float-right width-25">
+          <button class="button button-balanced icon ion-ios-telephone button-contact float-right"></button>
+          <button class="button button-positive icon ion-ios-information button-info float-right"></button>
+        </div>
+        <div class="clear-both"></div>
+        
+      </div>
+    </div>
+    
   </ion-content>
 </ion-view>
 

@@ -41,6 +41,27 @@ angular.module('starter.controllers', ['firebase'])
 
 	
 .controller('HomeCtrl', function($scope) {
+	// Actual implementations when these functions are set up
+	// $scope.senateReps = getSenateReps();
+	// $scope.houseReps = getHouseReps();
+
+	// Placeholders
+	$scope.senateReps = [
+		{ name: "Tammy Baldwin",
+			district: "2nd District"
+		}, {
+      name: "Ron Johnson",
+      district: "1st District"
+		}
+	];
+	$scope.houseReps = [
+    { name: "Mark Pocan",
+      district: "2nd Congressional District"
+    }, {
+      name: "F. James Sensenbrenner Jr.",
+      district: "5th Congressional District"
+    }
+	];
 
 	console.log("Rep Contact Controller initialized");
 })
@@ -59,7 +80,7 @@ angular.module('starter.controllers', ['firebase'])
 
 
 .controller('ElectionsCtrl', function($scope, $ionicModal) {
-// Actual implementations when these functions are set up
+	// Actual implementations when these functions are set up
 // 	$scope.userAddress = getUserAddress();
 //   $scope.pollingPlace = getPollingPlace();
 //   $scope.upcomingElections = getUpcomingElections();
