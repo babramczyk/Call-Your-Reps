@@ -1,0 +1,42 @@
+<ion-view view-title="Home" id="home-page">
+  
+  <div class="bar bar-header bar-stable">
+    <h1 class="title">bar-stable</h1>
+  </div>
+  
+  <ion-content class="padding">
+    
+    <button class="button icon ion-gear-a float-right" ng-click="openSettings()"></button>
+    
+    <h3>Your next election is on {{ nextElectionDate }}.</h3>
+    
+    <h3>Your polling place is located at {{ pollingPlace }}.</h3>
+    
+    <button class="button button-positive button-large icon-left ion-android-list center">
+      See a sample ballot
+    </button>
+    
+    
+    <script id="settings-modal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-balanced">
+          <h1 class="title">Change Settings</h1>
+        </ion-header-bar>
+        
+        <ion-content>
+          <p>Change your address/preferences here! (todo)</p>
+        
+        </ion-content>
+        
+        <div class="bar bar-footer">
+          <div class="button-bar">
+            <button class="button button-large button-assertive" ng-click="closeSettings()">Cancel</button>
+            <button class="button button-large button-positive pull-right" ng-click="saveSettings()">Save</button>
+          </div>
+        </div>
+      </ion-modal-view>
+    </script>
+  
+  
+  </ion-content>
+</ion-view>
