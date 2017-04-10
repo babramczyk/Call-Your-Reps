@@ -58,20 +58,33 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('ElectionsCtrl', function($scope) {
+.controller('ElectionsCtrl', function($scope, $ionicModal) {
 // Actual implementations when these functions are set up
-// $scope.nextElectionDate = getNextElectionDate().toLocaleDateString('en-US',
-//{ month: 'long',
-//day: 'numeric',
-//year: 'numeric' });
-// $scope.pollingPlace = getPollingPlace();
+// 	$scope.userAddress = getUserAddress();
+//   $scope.pollingPlace = getPollingPlace();
+//   $scope.upcomingElections = getUpcomingElections();
+// 	$scope.nextElectionDate = getNextElectionDate().toLocaleDateString('en-US', {
+// 		month: 'long',
+// 		day: 'numeric',
+// 		year: 'numeric' });
 
 // Placeholders for now
+	$scope.userAddress = "1234 Main St, Madison WI, 53711";
+  $scope.pollingPlace = "342 Langdon Street (Red Gym)";
+  $scope.upcomingElections = [
+		{ name: "2017 Spring Election",
+			date: "April 4, 2017",
+			ballot: 0 // Unique ID to pass as stateParam to find correct ballot
+		}, {
+      name: "2018 Spring Primary",
+      date: "February 4, 2017",
+      ballot: 1
+		}
+	];
 	$scope.nextElectionDate = new Date(2017, 4, 3).toLocaleDateString('en-US',
  		{ month: 'long',
 			day: 'numeric',
 		 	year: 'numeric' });
-	$scope.pollingPlace = "342 Langdon Street (Red Gym)";
 
 
 // Settings Modal

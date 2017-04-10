@@ -2,6 +2,7 @@
 .center { margin: 20% auto; width: auto; }
 button.center { display: block; }
 
-ion-view#home-page h3 {
-    margin: 10% 5%;
+ion-view#elections .item p {
+    color: #444;
+    font-size: 16px;
 }
