@@ -26,29 +26,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
   .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html'
-  })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.call', {
-    url: '/call',
-    views: {
-      'tab-call': {
-        templateUrl: 'templates/tab-call.html',
-        controller: 'CallCtrl'
-      }
-    }
   })
 
   .state('tab.home', {
@@ -57,28 +40,46 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         'tab-home': {
           templateUrl: 'templates/tab-home.html',
           controller: 'HomeCtrl'
+        }, 'rep-contact': {
+          templateUrl: 'templates/rep-contact.html',
+          controller: 'RepContactCtrl'
+        }, 'rep-info': {
+          templateUrl: 'templates/rep-info.html',
+          controller: 'RepInfoCtrl'
         }
       }
     })
-    // .state('tab.chat-detail', {
-    //   url: '/chats/:chatId',
-    //   views: {
-    //     'tab-chats': {
-    //       templateUrl: 'templates/chat-detail.html',
-    //       controller: 'ChatDetailCtrl'
-    //     }
-    //   }
-    // })
 
-  .state('tab.info', {
-    url: '/info',
+  .state('tab.elections', {
+    url: '/elections',
     views: {
-      'tab-info': {
-        templateUrl: 'templates/tab-info.html',
-        controller: 'InfoCtrl'
+      'tab-elections': {
+        templateUrl: 'templates/tab-elections.html',
+        controller: 'ElectionsCtrl'
       }
     }
   })
+
+  .state('tab.activity', {
+    url: '/activity',
+    views: {
+      'tab-activity': {
+        templateUrl: 'templates/tab-activity.html',
+        controller: 'ActivityCtrl'
+      }
+    }
+  })
+
+  .state('tab.feeds', {
+    url: '/feeds',
+    views: {
+      'tab-feeds': {
+        templateUrl: 'templates/tab-feeds.html',
+        controller: 'FeedsCtrl'
+      }
+    }
+  })
+
   .state('welcome', {
     url: '/welcome',
     templateUrl: 'templates/welcome.html',
@@ -86,6 +87,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/tab/home/tab-home');
 
 });

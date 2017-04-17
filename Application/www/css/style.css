@@ -1,7 +1,19 @@
 .float-right { float: right; }
 .center { margin: 20% auto; width: auto; }
 button.center { display: block; }
+.clear-both { clear: both;}
+.float-left { float: left; }
+.float-right { float: right; }
+.width-45 { width: 45%; }
+.width-75 { width: 75%; }
+.width-25 { width: 25%; }
 
-ion-view#home-page h3 {
-    margin: 10% 5%;
+.item p {
+    color: #444;
+    font-size: 16px;
+}
+
+/***** Home Page *****/
+.button-contact {
+    margin-bottom: 10px;
 }

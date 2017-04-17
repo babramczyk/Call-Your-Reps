@@ -4,20 +4,25 @@ Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
-
-  <!-- Call Tab -->
-  <ion-tab title="Call" icon-off="ion-ios-telephone-outline" icon-on="ion-ios-telephone" href="#/tab/dash">
-    <ion-nav-view name="tab-call"></ion-nav-view>
-  </ion-tab>
-
+  
   <!-- Home Tab -->
-  <ion-tab title="Home" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/tab/chats">
+  <ion-tab title="Home" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/tab/home">
     <ion-nav-view name="tab-home"></ion-nav-view>
   </ion-tab>
 
-  <!-- Info Tab -->
-  <ion-tab title="Info" icon-off="ion-ios-information-outline" icon-on="ion-ios-information" href="#/tab/account">
-    <ion-nav-view name="tab-info"></ion-nav-view>
+  <!-- Elections Tab -->
+  <ion-tab title="Elections" icon-off="ion-ios-filing-outline" icon-on="ion-ios-filing" href="#/tab/elections">
+    <ion-nav-view name="tab-elections"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Activity Tab -->
+  <ion-tab title="Activity" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/activity">
+    <ion-nav-view name="tab-activity"></ion-nav-view>
+  </ion-tab>
+  
+  <!-- Feeds Tab -->
+  <ion-tab title="Feeds" icon-off="ion-social-twitter-outline" icon-on="ion-social-twitter" href="#/tab/feeds">
+    <ion-nav-view name="tab-feeds"></ion-nav-view>
   </ion-tab>
 
 
