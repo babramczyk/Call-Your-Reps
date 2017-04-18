@@ -9,21 +9,21 @@ angular.module('starter.controllers', ['firebase'])
 
 	// Fuction for email signup!!! NOT WORKING !!!
 	$scope.signupEmail = function(){
- 
+
 		var ref = new Firebase("https://call-your-reps-b230a.firebaseio.com");
- 
+
 		ref.auth().createUserWithEmailAndPassword($scope.newEmail, $scope.newPassword).catch(function(error) {
 			var errorCode = error.code;
 			var errorMessage = error.message;
 			console.log("Error creating user:", errorMessage);
-		});	 
+		});
 	};
 
 	// Function for email signin !!! NOT WORKING !!!
 	$scope.loginEmail = function(){
- 
+
 		var ref = new Firebase("https://call-your-reps-b230a.firebaseio.com");
-	 
+
 		ref.authWithPassword({
 		email: $scope.userEmail,
 		password : $scope.userPassword
@@ -34,12 +34,22 @@ angular.module('starter.controllers', ['firebase'])
 		console.log("Authenticated successfully with payload:", authData);
 		}
 		});
- 
+
 	};
 
 })
 
-	
+  .controller('TwitterFeedCtrl', function($scope, TwitterREST) {
+    TwitterREST.sync().then(function(tweets){
+      console.log(tweets);
+      $scope.tweets = tweets.statuses;
+    });
+
+    $scope.innapBrowser = function (value) {
+      window.open(value, '_blank');
+    };
+  })
+
 .controller('HomeCtrl', function($scope) {
 	// Actual implementations when these functions are set up
 	// $scope.senateReps = getSenateReps();
@@ -71,8 +81,8 @@ angular.module('starter.controllers', ['firebase'])
 
 	console.log("Rep Contact Controller initialized");
 })
-	
-	
+
+
 .controller('RepInfoCtrl', function($scope) {
 
 	console.log("Rep Info Controller initialized");

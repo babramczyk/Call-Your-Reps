@@ -26,7 +26,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-  $stateProvider
+    $stateProvider
 
   .state('tab', {
     url: '/tab',
@@ -75,7 +75,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     views: {
       'tab-feeds': {
         templateUrl: 'templates/tab-feeds.html',
-        controller: 'FeedsCtrl'
+        controller: 'TwitterFeedCtrl'
       }
     }
   })
