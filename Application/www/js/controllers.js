@@ -49,7 +49,7 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 	
-.controller('HomeCtrl', function($scope, $state) {
+.controller('HomeCtrl', function($scope, $state, $ionicViewSwitcher) {
 	// Actual implementations when these functions are set up
 	// $scope.senateReps = getSenateReps();
 	// $scope.houseReps = getHouseReps();
@@ -73,7 +73,9 @@ angular.module('starter.controllers', ['firebase'])
 	];
 
 	$scope.goToContactPage = function(name) {
-	  $state.go('rep-contact', { name: name});
+	  $ionicViewSwitcher.nextDirection('forward');
+	  $state.go('rep-contact', { name: name });
+    // $state.go('tab.elections');
 	  console.log("clicked");
   };
 
@@ -82,6 +84,23 @@ angular.module('starter.controllers', ['firebase'])
 
 
 .controller('RepContactCtrl', function($scope, $stateParams) {
+  // $scope.name = $stateParams.name;
+  // $scope.userName = getUserFullName(); // TODO: Database person, implement function that queries for user's name
+
+  // Placeholders
+  $scope.name = "Tammy Baldwin";
+  $scope.userName = "Brett Abramczyk";
+  $scope.imgSrc = "https://s3.amazonaws.com/givegreen-cdn/2011/09/680484_10151472016201102_1735214013_o-300x300.jpg";
+
+  $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.name + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
+
+  $scope.call = function() {
+    // TODO: Implement
+  }
+
+  $scope.email = function() {
+    // TODO: Implement
+  }
 
 	console.log("Rep name: " + $stateParams.name);
 })

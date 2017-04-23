@@ -40,13 +40,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         'tab-home': {
           templateUrl: 'templates/tab-home.html',
           controller: 'HomeCtrl'
-        }, 'rep-contact': {
-          templateUrl: 'templates/rep-contact.html',
-          controller: 'RepContactCtrl'
-        }, 'rep-info': {
-          templateUrl: 'templates/rep-info.html',
-          controller: 'RepInfoCtrl'
-        }
+        },
+        // 'rep-contact': {
+        //   templateUrl: 'templates/rep-contact.html',
+        //   controller: 'RepContactCtrl'
+        // }, 'rep-info': {
+        //   templateUrl: 'templates/rep-info.html',
+        //   controller: 'RepInfoCtrl'
+        // }
       }
     })
 
@@ -84,9 +85,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/welcome',
     templateUrl: 'templates/welcome.html',
     controller: 'WelcomeCtrl'
-  });
+  })
+
+
+  .state('rep-contact', {
+    url: '/contact',
+    // parent: 'tab.home',
+    templateUrl: 'templates/rep-contact.html',
+    controller: 'RepContactCtrl',
+    params: {
+      name: null
+    }
+  })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/welcome');
+  $urlRouterProvider.otherwise('/contact');
 
 });

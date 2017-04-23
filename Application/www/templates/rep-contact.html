@@ -1,5 +1,19 @@
-<ion-view view-title="Contact">
+<ion-view view-title="Contact" hide-nav-bar="true" id="contact-page">
   <ion-content class="padding">
-    <h2>Contact Page</h2>
+    
+    <!--TODO: Styling changes-->
+    
+    <div class="header-wrap">
+      <img src="{{imgSrc}}" class="rep-photo"/>
+      <h1>{{ name }}</h1>
+      <div class="clear-both"></div>
+    </div>
+    
+    <h3>Sample Script</h3>
+    <p>{{ script }}</p>
+    
+    <button class="button button-balanced icon-left ion-ios-telephone center" ng-click="call()">Call</button>
+    <button class="button button-positive icon-left ion-ios-email center" ng-click="email()">Email</button>
+    
   </ion-content>
 </ion-view>
