@@ -1,89 +1,37 @@
-<ion-view view-title="Welcome">
+<ion-view><!-- Hide this -->
   <ion-content class="padding">
-	
-	<br>
-
-	<!-- Welcome message -->    
-	<div style="float: middle;">
-	    <h3>Welcome to</h3>
-	    <h2>Call Your Reps</h2>
+    
+    <!--TODO: Styling, language changes-->
+    
+    <h1 align="center">Welcome</h1>
+    <p>Enter your permanent address so we can find your representatives:</p>
+    
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">Address</span>
+        <input type="text" ng-model="$parent.address">
+      </label>
+    
+      <label class="item item-input">
+        <span class="input-label">City</span>
+        <input type="text" ng-model="$parent.city">
+      </label>
+    
+      <label class="item item-input">
+        <span class="input-label">State</span>
+        <input type="text" ng-model="$parent.state">
+      </label>
+    
+      <label class="item item-input">
+        <span class="input-label">ZIP Code</span>
+        <input type="text" ng-model="$parent.zip">
+      </label>
+      
+      <button class="button button-positive button-block" ng-click="submit()" nav-direction="enter">
+        <!--TODO: Switch nav direction so it looks like it's swiping upwards. Maybe not possible-->
+        Submit
+      </button>
     </div>
-    <br>
-
-	<!-- Returning Users Sign In -->    
-    <h3>New User? Sign up here.</h3>
-
-    <!-- First Name START -->
-    <div class="bottom">
-      <div style="float: left; width: 50%;">
-        <label class="item item-input">
-          <input type="text" name="firstName" id="firstName-textarea"
-                  ng-model="$parent.firstName" placeholder="First Name">
-        </label>
-      </div>
-      <!-- First Name END -->
-
-      <!-- Last Name START -->
-      <div style="float: left; width: 50%;">
-        <label class="item item-input">
-          <input type="text" name="lastName" id="lastName-textarea"
-                 ng-model="$parent.lastName" placeholder="Last Name">
-        </label>
-      </div>
-      <!-- Last Name END -->
-    </div>
-	
-	<!-- Email START -->
-	<div class="bottom"> 
-	  <div style="float: left; width: 100%;">
-        <label class="item item-input">
-          <input type="text" name="newEmail" id="newEmail-textarea"
-                 ng-model="$parent.newEmail" placeholder="Email">
-        </label>
-      </div>
-    </div>
-	<!-- Email END -->
-
-	<!-- Password START -->
-    <div class="bottom">  
-	  <div style="float: left; width: 100%;">
-        <label class="item item-input">
-          <input type="text" name="newPassword" id="newPassword-textarea"
-                 ng-model="$parent.newPassword" placeholder="Password">
-        </label>
-      </div>
-    </div>
-    <!-- Password END -->
-
-    <button class="button button-full" ng-click="signupEmail()">Sign Up</button>
-    <br>
-
-	<!-- New Users Sign Up -->    
-    <h3>Returning User? Sign in here.</h3>
-
-	<!-- Email START -->
-	<div class="bottom"> 
-	  <div style="float: left; width: 100%;">
-        <label class="item item-input">
-          <input type="text" name="userEmail" id="userEmail-textarea"
-                 ng-model="$parent.userEmail" placeholder="Email">
-        </label>
-      </div>
-    </div>
-	<!-- Email END -->
-
-	<!-- Password START -->
-    <div class="bottom">  
-	  <div style="float: left; width: 100%;">
-        <label class="item item-input">
-          <input type="text" name="userPassword" id="userPassword-textarea"
-                 ng-model="$parent.userPassword" placeholder="Password">
-        </label>
-      </div>
-    </div>
-    <!-- Password END -->
-
-    <button class="button button-full" ng-click="loginEmail()">Sign In</button>
-
+    
   </ion-content>
 </ion-view>

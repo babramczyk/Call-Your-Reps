@@ -1,4 +1,5 @@
 .float-right { float: right; }
+.hidden { display: none; }
 .center { margin: 20% auto; width: auto; }
 button.center { display: block; }
 .clear-both { clear: both;}
