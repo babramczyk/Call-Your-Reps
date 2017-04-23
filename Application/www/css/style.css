@@ -8,6 +8,7 @@ button.center { display: block; }
 .width-45 { width: 45%; }
 .width-75 { width: 75%; }
 .width-25 { width: 25%; }
+.width-50 { width: 50%; }
 
 .item p {
     color: #444;
