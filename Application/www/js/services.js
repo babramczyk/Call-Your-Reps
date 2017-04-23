@@ -32,13 +32,13 @@ angular.module('starter.services', [])
   }];
 
   return {
-    all: function() {
+    all: function () {
       return chats;
     },
-    remove: function(chat) {
+    remove: function (chat) {
       chats.splice(chats.indexOf(chat), 1);
     },
-    get: function(chatId) {
+    get: function (chatId) {
       for (var i = 0; i < chats.length; i++) {
         if (chats[i].id === parseInt(chatId)) {
           return chats[i];
@@ -47,6 +47,7 @@ angular.module('starter.services', [])
       return null;
     }
   }
+}
     .factory('Base64', function(){
       var self = this;
       self.encode = function (input) {
@@ -198,4 +199,4 @@ angular.module('starter.services', [])
 
       return self;
 
-});
+}
