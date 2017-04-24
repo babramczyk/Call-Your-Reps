@@ -86,23 +86,18 @@ angular.module('starter.controllers', ['firebase'])
 .controller('RepContactCtrl', function($scope, $stateParams) {
   // $scope.name = $stateParams.name;
   // $scope.userName = getUserFullName(); // TODO: Database person, implement function that queries for user's name
+  // $scope.imgSrc = getRepImgSrc($scope.name);
+  // $scope.phoneNumber = getRepPhone($scope.name);
+  // $scope.email = getRepEmail($scope.email);
 
   // Placeholders
   $scope.name = "Tammy Baldwin";
   $scope.userName = "Brett Abramczyk";
   $scope.imgSrc = "https://s3.amazonaws.com/givegreen-cdn/2011/09/680484_10151472016201102_1735214013_o-300x300.jpg";
+  $scope.phoneNumber = "+1-414-902-0285";
+  $scope.email = "bjabramczyk@gmail.com";
 
   $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.name + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
-
-  $scope.call = function() {
-    // TODO: Implement
-  }
-
-  $scope.email = function() {
-    // TODO: Implement
-  }
-
-	console.log("Rep name: " + $stateParams.name);
 })
 	
 	

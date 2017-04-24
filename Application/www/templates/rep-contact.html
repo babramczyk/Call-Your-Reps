@@ -4,7 +4,7 @@
     <!--TODO: Styling changes-->
     
     <div class="header-wrap">
-      <img src="{{imgSrc}}" class="rep-photo"/>
+      <img src="{{ imgSrc }}" class="rep-photo"/>
       <h1>{{ name }}</h1>
       <div class="clear-both"></div>
     </div>
@@ -12,8 +12,8 @@
     <h3>Sample Script</h3>
     <p>{{ script }}</p>
     
-    <button class="button button-balanced icon-left ion-ios-telephone center" ng-click="call()">Call</button>
-    <button class="button button-positive icon-left ion-ios-email center" ng-click="email()">Email</button>
+    <a href="tel:{{ phoneNumber }}" class="button button-balanced icon-left ion-ios-telephone center">Call</a>
+    <a href="mailto:{{ email }}" class="button button-positive icon-left ion-ios-email center">Email</a>
     
   </ion-content>
 </ion-view>
