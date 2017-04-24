@@ -78,16 +78,7 @@ angular.module('starter.controllers', ['firebase'])
     }
 	];
 
-	$scope.goToContactPage = function(name) {
-    $ionicViewSwitcher.nextDirection('forward');
-    $state.go('rep-contact', { name: name });
-  };
-
-  $scope.goToInfoPage = function(name) {
-    console.log("clicked");
-    $ionicViewSwitcher.nextDirection('forward');
-    $state.go('rep-info', { name: name });
-  };
+	// $ionicViewSwitcher.nextDirection('forward');
 })
 
 

@@ -40,7 +40,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         'tab-home': {
           templateUrl: 'templates/tab-home.html',
           controller: 'HomeCtrl'
-        },
+        }
         // 'rep-contact': {
         //   templateUrl: 'templates/rep-contact.html',
         //   controller: 'RepContactCtrl'
@@ -48,6 +48,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         //   templateUrl: 'templates/rep-info.html',
         //   controller: 'RepInfoCtrl'
         // }
+      }
+    })
+
+    .state('tab.rep-contact', {
+      url: '/home/contact/:name',
+      views: {
+        'tab-home': {
+          templateUrl: 'templates/rep-contact.html',
+          controller: 'RepContactCtrl'
+        }
+      }
+    })
+
+    .state('tab.rep-info', {
+      url: '/home/info/:name',
+      views: {
+        'tab-home': {
+          templateUrl: 'templates/rep-info.html',
+          controller: 'RepInfoCtrl'
+        }
       }
     })
 
@@ -85,27 +105,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     url: '/welcome',
     templateUrl: 'templates/welcome.html',
     controller: 'WelcomeCtrl'
-  })
-
-
-  .state('rep-contact', {
-    url: '/contact',
-    // parent: 'tab.home',
-    templateUrl: 'templates/rep-contact.html',
-    controller: 'RepContactCtrl',
-    params: {
-      name: null
-    }
-  })
-
-  .state('rep-info', {
-    url: '/info',
-    // parent: 'tab.home',
-    templateUrl: 'templates/rep-info.html',
-    controller: 'RepInfoCtrl',
-    params: {
-      name: null
-    }
   })
 
   // if none of the above states are matched, use this as the fallback
