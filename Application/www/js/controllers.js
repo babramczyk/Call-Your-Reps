@@ -5,12 +5,13 @@ angular.module('starter.controllers', ['firebase'])
 /////////////////////////////////////
 .controller('WelcomeCtrl', function($state, $scope, $firebase) {
 
+  $scope.firstName =
   $scope.state = "none";
 
 	$scope.submit = function() {
-		// TODO: Database person, save user's address from scope into SQLite database
+		setUserName($scope.firstName, $scope.lastName);
+		setUserAddress($scope.address, $scope.city, $scope.state, $scope.zip);
 
-    console.log($scope.state);
 		$state.go('tab.home');
 	}
 
@@ -84,20 +85,21 @@ angular.module('starter.controllers', ['firebase'])
 
 
 .controller('RepContactCtrl', function($scope, $stateParams) {
-  // $scope.name = $stateParams.name;
-  // $scope.userName = getUserFullName(); // TODO: Database person, implement function that queries for user's name
+  // $scope.repName = $stateParams.name;
+  // var userName = getUserName();
+  // $scope.userName = userName.firstName + userName.lastName;
   // $scope.imgSrc = getRepImgSrc($scope.name);
   // $scope.phoneNumber = getRepPhone($scope.name);
-  // $scope.email = getRepEmail($scope.email);
+  // $scope.emailAddress = getRepEmailAddress($scope.name);
 
   // Placeholders
-  $scope.name = "Tammy Baldwin";
+  $scope.repName = "Tammy Baldwin";
   $scope.userName = "Brett Abramczyk";
   $scope.imgSrc = "https://s3.amazonaws.com/givegreen-cdn/2011/09/680484_10151472016201102_1735214013_o-300x300.jpg";
-  $scope.phoneNumber = "+1-414-902-0285";
-  $scope.email = "bjabramczyk@gmail.com";
+  $scope.phoneNumber = "+1-608-264-5338";
+  $scope.emailAddress = "tbaldwin@state.gov";
 
-  $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.name + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
+  $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.repName + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
 })
 	
 	
@@ -109,13 +111,14 @@ angular.module('starter.controllers', ['firebase'])
 
 .controller('ElectionsCtrl', function($scope, $ionicModal) {
 	// Actual implementations when these functions are set up
-// 	$scope.userAddress = getUserAddress();
-//   $scope.pollingPlace = getPollingPlace();
-//   $scope.upcomingElections = getUpcomingElections();
-// 	$scope.nextElectionDate = getNextElectionDate().toLocaleDateString('en-US', {
-// 		month: 'long',
-// 		day: 'numeric',
-// 		year: 'numeric' });
+  // var address = getUserAddress();
+  // $scope.userAddress = address.address + ", " + address.city + " " + address.state + ", " + address.zip;
+  // $scope.pollingPlace = getPollingPlace();
+  // $scope.upcomingElections = getUpcomingElections();
+  // $scope.nextElectionDate = getNextElectionDate().toLocaleDateString('en-US', {
+		// month: 'long',
+		// day: 'numeric',
+		// year: 'numeric' });
 
 // Placeholders for now
 	$scope.userAddress = "1234 Main St, Madison WI, 53711";
