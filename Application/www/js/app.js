@@ -98,7 +98,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('rep-info', {
+    url: '/info',
+    // parent: 'tab.home',
+    templateUrl: 'templates/rep-info.html',
+    controller: 'RepInfoCtrl',
+    params: {
+      name: null
+    }
+  })
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/contact');
+  $urlRouterProvider.otherwise('/tab/home');
 
 });

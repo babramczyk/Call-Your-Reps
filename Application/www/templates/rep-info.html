@@ -1,5 +1,16 @@
-<ion-view view-title="Representative Info">
+<ion-view view-title="Information" id="rep-info-page">
   <ion-content class="padding">
-    <h2>Representative Info Page</h2>
+    
+    <!--TODO: Styling changes-->
+    
+    <div class="header-wrap">
+      <img src="{{ imgSrc }}" class="rep-photo"/>
+      <h1>{{ repName }}</h1>
+      <div class="clear-both"></div>
+    </div>
+    
+    <h3>Biography</h3>
+    <p>{{ bio }}</p>
+  
   </ion-content>
 </ion-view>

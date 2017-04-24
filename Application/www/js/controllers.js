@@ -4,9 +4,14 @@ angular.module('starter.controllers', ['firebase'])
 // WELCOME SCREEN CONTROLLER //
 /////////////////////////////////////
 .controller('WelcomeCtrl', function($state, $scope, $firebase) {
-
-  $scope.firstName =
-  $scope.state = "none";
+  // var userName = getUserName();
+  // var userAddress = getUserAddress();
+  // $scope.firstName = userName.firstName;
+  // $scope.lastName = userName.lastName;
+  // $scope.address = userAddress.address;
+  // $scope.city = userAddress.city;
+  // $scope.state = "none";
+  // $scope.zip = userAddress.zip;
 
 	$scope.submit = function() {
 		setUserName($scope.firstName, $scope.lastName);
@@ -49,7 +54,7 @@ angular.module('starter.controllers', ['firebase'])
   // };
 })
 
-	
+
 .controller('HomeCtrl', function($scope, $state, $ionicViewSwitcher) {
 	// Actual implementations when these functions are set up
 	// $scope.senateReps = getSenateReps();
@@ -74,13 +79,15 @@ angular.module('starter.controllers', ['firebase'])
 	];
 
 	$scope.goToContactPage = function(name) {
-	  $ionicViewSwitcher.nextDirection('forward');
-	  $state.go('rep-contact', { name: name });
-    // $state.go('tab.elections');
-	  console.log("clicked");
+    $ionicViewSwitcher.nextDirection('forward');
+    $state.go('rep-contact', { name: name });
   };
 
-	console.log("Rep Contact Controller initialized");
+  $scope.goToInfoPage = function(name) {
+    console.log("clicked");
+    $ionicViewSwitcher.nextDirection('forward');
+    $state.go('rep-info', { name: name });
+  };
 })
 
 
@@ -101,11 +108,20 @@ angular.module('starter.controllers', ['firebase'])
 
   $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.repName + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
 })
-	
-	
-.controller('RepInfoCtrl', function($scope) {
 
-	console.log("Rep Info Controller initialized");
+
+.controller('RepInfoCtrl', function($scope, $stateParams) {
+  // $scope.repName = $stateParams.name;
+  // $scope.imgSrc = getRepImgSrc($scope.name);
+  // $scope.phoneNumber = getRepPhone($scope.name);
+  // $scope.emailAddress = getRepEmailAddress($scope.name);
+
+  // Placeholders
+  $scope.repName = "Tammy Baldwin";
+  $scope.imgSrc = "https://s3.amazonaws.com/givegreen-cdn/2011/09/680484_10151472016201102_1735214013_o-300x300.jpg";
+  $scope.phoneNumber = "+1-608-264-5338";
+  $scope.emailAddress = "tbaldwin@state.gov";
+  $scope.bio = "Democratic politician Tammy Baldwin was born in Wisconsin on February 11, 1962. From 1993 to 1999, Baldwin represented her state's 78th District in the Wisconsin State Assembly. While serving in the House (1999-2012), she became known for focusing on energy issues—serving on the House's Committee on Energy and Commerce—and for supporting LGBT rights and universal health care. Baldwin went on to become Wisconsin's first congresswoman, defeating Republican candidate Josephine Musser in the 1998 election for a seat in the U.S. House of Representatives. She became the first openly gay politician elected to the U.S. Senate, as well as the first Wisconsin woman elected to the Senate, in 2012.";
 })
 
 
