@@ -172,7 +172,16 @@ angular.module('starter.controllers', ['firebase'])
   else {
   	$scope.address = "No Address Listed";
   }
-  $scope.bio = "TODO: Embed rep's website";
+  if(rep.urls[0]) {
+  	//TODO: Add support for back button?
+  	$scope.web = "Visit Reps Website";
+  	$scope.website = rep.urls[0];
+  }
+  else {
+  	//TODO: Make button unavailable
+  	$scope.web = "No Website Listed";
+  }
+  $scope.bio = "TODO: Find a bio source?";
 })
 
 
