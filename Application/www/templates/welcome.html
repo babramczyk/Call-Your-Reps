@@ -4,9 +4,19 @@
     <!--TODO: Styling, language changes-->
     
     <h1 align="center">Welcome</h1>
-    <p>Enter your permanent address so we can find your representatives:</p>
+    <p>Enter some information about yourself so we can help find your representatives:</p>
     
     <div class="list">
+      <label class="item item-input">
+        <span class="input-label">First Name</span>
+        <input type="text" ng-model="$parent.firstName">
+      </label>
+  
+      <label class="item item-input">
+        <span class="input-label">Last Name</span>
+        <input type="text" ng-model="$parent.lastName">
+      </label>
+      
       <label class="item item-input">
         <span class="input-label">Address</span>
         <input type="text" ng-model="$parent.address">

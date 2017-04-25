@@ -1,7 +1,8 @@
 .float-right { float: right; }
 .hidden { display: none; }
-.center { margin: 20% auto; width: auto; }
-button.center { display: block; }
+.center { margin-left: auto; margin-right: auto; }
+.button.center { display: block; margin-top: 5%; margin-bottom: 5%; }
+a.center { display: table !important; }
 .clear-both { clear: both;}
 .float-left { float: left; }
 .float-right { float: right; }
@@ -9,6 +10,7 @@ button.center { display: block; }
 .width-75 { width: 75%; }
 .width-25 { width: 25%; }
 .width-50 { width: 50%; }
+.width-15 { width: 15%; }
 
 .item p {
     color: #444;
@@ -18,4 +20,16 @@ button.center { display: block; }
 /***** Home Page *****/
 .button-contact {
     margin-bottom: 10px;
+}
+
+.rep-photo {
+    float: left;
+    width: 25%;
+    margin-right: 35px;
+    border-radius: 1000px;
+    max-width:300px;
+}
+
+.header-wrap {
+    margin-bottom: 2%;
 }
