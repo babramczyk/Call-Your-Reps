@@ -52,7 +52,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
 
     .state('tab.rep-contact', {
-      url: '/home/contact/:name',
+      url: '/home/contact',
+      params: {rep: {}},
       views: {
         'tab-home': {
           templateUrl: 'templates/rep-contact.html',
@@ -62,7 +63,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
 
     .state('tab.rep-info', {
-      url: '/home/info/:name',
+      url: '/home/info',
+      params: {rep: {}},
       views: {
         'tab-home': {
           templateUrl: 'templates/rep-info.html',
@@ -107,7 +109,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     controller: 'WelcomeCtrl'
   })
 
+  .state('splash', {
+    url: '/splash',
+    templateUrl: 'templates/splash.html',
+    controller: 'SplashCtrl'
+  })
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/splash');
 
 });

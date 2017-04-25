@@ -1,122 +1,179 @@
 angular.module('starter.controllers', ['firebase'])
 
 /////////////////////////////////////
-// WELCOME SCREEN CONTROLLER //
+//     SPLASH SCREEN CONTROLLER    //
 /////////////////////////////////////
-.controller('WelcomeCtrl', function($state, $scope, $firebase) {
-  // var userName = getUserName();
-  // var userAddress = getUserAddress();
-  // $scope.firstName = userName.firstName;
-  // $scope.lastName = userName.lastName;
-  // $scope.address = userAddress.address;
-  // $scope.city = userAddress.city;
-  // $scope.state = "none";
-  // $scope.zip = userAddress.zip;
+.controller('SplashCtrl', function($state, $scope, $window, $rootScope, $timeout) {
+
+	//$scope.submit = function() {
+		
+		// If user data is stored
+		if($window.localStorage['userData']) {
+
+			console.log("Accessing Stored Load Data");
+
+			//Load userData
+			$rootScope.userData = JSON.parse($window.localStorage['userData']);
+			//console.log($rootScope.userData);
+
+			//Load repData
+			$rootScope.repData = JSON.parse($window.localStorage['repData']);
+			//console.log($rootScope.repData);
+
+			//TODO: Update election data (sometimes update repData? Only if election data changes?)
+
+			//Go to home
+			$timeout(function(){$state.go('tab.home');}, 3000);
+		}
+		// Else, go to welcome to get user data
+		else {
+			console.log("No Available Load Data");
+			$timeout(function(){$state.go('welcome');}, 3000);
+		}
+		
+	//}
+})
+
+/////////////////////////////////////
+//    WELCOME SCREEN CONTROLLER    //
+/////////////////////////////////////
+.controller('WelcomeCtrl', function($state, $scope, $rootScope, Query, $window) {
 
 	$scope.submit = function() {
 		setUserName($scope.firstName, $scope.lastName);
 		setUserAddress($scope.address, $scope.city, $scope.state, $scope.zip);
 
-		$state.go('tab.home');
+		var addr = $scope.address + ' ' + $scope.city + ' ' + $scope.state + ' ' + $scope.zip;
+	
+		//console.log(addr);
+		
+		var promise = Query.getRepData(addr);
+		
+		promise.then(function(data) {
+			
+			//console.log(data);
+
+			if(data.office) {
+				//Save to rootScope and localStorage
+				$rootScope.userData = {'firstName': $scope.firstName,
+					'lastName': $scope.lastName,
+					'address': data.userAddrs};
+				//console.log($rootScope.userData);
+
+				$window.localStorage['userData'] = JSON.stringify($rootScope.userData);
+
+				$rootScope.repData = {'office': data.office,
+					'twitterHandles': data.twitterHandles};
+				//console.log($rootScope.repData);
+
+				$window.localStorage['repData'] = JSON.stringify($rootScope.repData);
+
+				//Go to home
+				$state.go('tab.home');
+			}
+			else{
+				//TODO: Display Error message, tell user to re-enter address
+
+				//Log error
+				console.log("Invalid Address");
+			}
+		});
 	}
-
-
-  // console.log("Welcome Screen Controller initialized");
-  //
-  // // Fuction for email signup!!! NOT WORKING !!!
-  // $scope.signupEmail = function(){
-  //
-  // 	var ref = new Firebase("https://call-your-reps-b230a.firebaseio.com");
-  //
-  // 	ref.auth().createUserWithEmailAndPassword($scope.newEmail, $scope.newPassword).catch(function(error) {
-  // 		var errorCode = error.code;
-  // 		var errorMessage = error.message;
-  // 		console.log("Error creating user:", errorMessage);
-  // 	});
-  // };
-  //
-  // // Function for email signin !!! NOT WORKING !!!
-  // $scope.loginEmail = function(){
-  //
-  // 	var ref = new Firebase("https://call-your-reps-b230a.firebaseio.com");
-  //
-  // 	ref.authWithPassword({
-  // 	email: $scope.userEmail,
-  // 	password : $scope.userPassword
-  // 	}, function(error, authData) {
-  // 	if (error) {
-  // 		console.log("Login Failed!", error);
-  // 	} else {
-  // 	console.log("Authenticated successfully with payload:", authData);
-  // 	}
-  // 	});
-  //
-  // };
 })
 
 
 .controller('HomeCtrl', function($scope, $state, $ionicViewSwitcher) {
-	// Actual implementations when these functions are set up
-	// $scope.senateReps = getSenateReps();
-	// $scope.houseReps = getHouseReps();
+	
+	$scope.contact = function(rep) {
+		$state.go('tab.rep-contact', {rep: rep});
+	}
 
-	// Placeholders
-	$scope.senateReps = [
-		{ name: "Tammy Baldwin",
-			district: "2nd District"
-		}, {
-      name: "Ron Johnson",
-      district: "1st District"
-		}
-	];
-	$scope.houseReps = [
-    { name: "Mark Pocan",
-      district: "2nd Congressional District"
-    }, {
-      name: "F. James Sensenbrenner Jr.",
-      district: "5th Congressional District"
-    }
-	];
+	$scope.info = function(rep) {
+		$state.go('tab.rep-info', {rep: rep});
+	}
 
 	// $ionicViewSwitcher.nextDirection('forward');
 })
 
 
-.controller('RepContactCtrl', function($scope, $stateParams) {
-  // $scope.repName = $stateParams.name;
-  // var userName = getUserName();
-  // $scope.userName = userName.firstName + userName.lastName;
-  // $scope.imgSrc = getRepImgSrc($scope.name);
-  // $scope.phoneNumber = getRepPhone($scope.name);
-  // $scope.emailAddress = getRepEmailAddress($scope.name);
+.controller('RepContactCtrl', function($scope, $rootScope, $stateParams) {
+  // stateParam will be a rep data object with appropriate fields
+  var rep = $stateParams.rep;
+  
+  // Fill in defaults
+  $scope.phone = "Call";
+  $scope.email = "Email";
+  
+  // Fill rep info
+  $scope.repName = rep.name;
+  if(rep.photoUrl) {
+  	$scope.imgSrc = rep.photoUrl;
+  }
+  else {
+  	// TODO: Use generic silhouette
+  }
+  if(rep.phones) {
+    $scope.phoneNumber = rep.phones[0];
+  }
+  else {
+  	// TODO: Make button unavailable
+  	$scope.phone = "NO PHONE LISTED";
+  }
+  if(rep.emails) {
+  	$scope.emailAddress = rep.emails[0];
+  }
+  else {
+  	// TODO: Make button unavailable
+  	$scope.email = "NO EMAIL LISTED";
+  }
+  
 
-  // Placeholders
-  $scope.repName = "Tammy Baldwin";
-  $scope.userName = "Brett Abramczyk";
-  $scope.imgSrc = "https://s3.amazonaws.com/givegreen-cdn/2011/09/680484_10151472016201102_1735214013_o-300x300.jpg";
-  $scope.phoneNumber = "+1-608-264-5338";
-  $scope.emailAddress = "tbaldwin@state.gov";
-
-  $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.repName + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
+  $scope.script = "Hello, my name is " + $rootScope.userData.firstName + " and I am in representative " + $scope.repName + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
 })
 
 
-.controller('RepInfoCtrl', function($scope, $stateParams) {
-  // $scope.repName = $stateParams.name;
-  // $scope.imgSrc = getRepImgSrc($scope.name);
-  // $scope.phoneNumber = getRepPhone($scope.name);
-  // $scope.emailAddress = getRepEmailAddress($scope.name);
+.controller('RepInfoCtrl', function($scope, $rootScope, $stateParams) {
+  // stateParam will be a rep data object with appropriate fields
+  var rep = $stateParams.rep;
 
-  // Placeholders
-  $scope.repName = "Tammy Baldwin";
-  $scope.imgSrc = "https://s3.amazonaws.com/givegreen-cdn/2011/09/680484_10151472016201102_1735214013_o-300x300.jpg";
-  $scope.phoneNumber = "+1-608-264-5338";
-  $scope.emailAddress = "tbaldwin@state.gov";
-  $scope.bio = "Democratic politician Tammy Baldwin was born in Wisconsin on February 11, 1962. From 1993 to 1999, Baldwin represented her state's 78th District in the Wisconsin State Assembly. While serving in the House (1999-2012), she became known for focusing on energy issues—serving on the House's Committee on Energy and Commerce—and for supporting LGBT rights and universal health care. Baldwin went on to become Wisconsin's first congresswoman, defeating Republican candidate Josephine Musser in the 1998 election for a seat in the U.S. House of Representatives. She became the first openly gay politician elected to the U.S. Senate, as well as the first Wisconsin woman elected to the Senate, in 2012.";
+  console.log(rep);
+
+  // Fill rep info
+  $scope.repName = rep.name;
+  if(rep.photoUrl) {
+  	$scope.imgSrc = rep.photoUrl;
+  }
+  else {
+  	// TODO: Use generic silhouette
+  }
+  if(rep.phones) {
+    $scope.phoneNumber = rep.phones[0];
+  }
+  else {
+  	$scope.phoneNumber = "No Phone Listed";
+  }
+  if(rep.emails) {
+  	$scope.emailAddress = rep.emails[0];
+  }
+  else {
+  	$scope.emailAddress = "No Email Listed";
+  }
+  $scope.address = "";
+  if(rep.address) {  
+  	var add = rep.address[0];	
+  	for(var line in add) {
+  	   $scope.address += (add[line] + '\n');
+  	}
+  	
+  }
+  else {
+  	$scope.address = "No Address Listed";
+  }
+  $scope.bio = "TODO: Embed rep's website";
 })
 
 
-.controller('ElectionsCtrl', function($scope, $ionicModal) {
+.controller('ElectionsCtrl', function($scope, $rootScope, $ionicModal) {
 	// Actual implementations when these functions are set up
   // var address = getUserAddress();
   // $scope.userAddress = address.address + ", " + address.city + " " + address.state + ", " + address.zip;
@@ -173,12 +230,14 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('ActivityCtrl', function($scope) {
+.controller('ActivityCtrl', function($scope, $rootScope) {
 
 	console.log("Activity Screen Controller initialized");
 })
 
-.controller('FeedsCtrl', function($scope) {
+.controller('FeedsCtrl', function($scope, $rootScope) {
 
 	console.log("Feeds Screen Controller initialized");
+
+	//$rootScope.repData.twitterHandles is a string array of twitter handles
 })

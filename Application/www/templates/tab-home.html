@@ -3,44 +3,27 @@
   
     <!-- TODO: Possibly revise styling if we have no more information to put in each card. Currently, a lot of wasted space -->
   
-    <div class="card">
+
+    <div class="card" ng-repeat="office in repData.office">
       <div class="item item-divider">
-        House of Representatives
+        {{office.name}}
       </div>
-      <div class="item item-text-wrap" ng-repeat="rep in senateReps">
+      <div class="item item-text-wrap" ng-repeat="rep in office.holders">
       
         <div class="float-left width-75">
           <p><strong>{{ rep.name }}</strong>
-          <p>{{ rep.district }}
+          <p>Party: {{ rep.party }}
         </div>
         <div class="float-right width-25">
-          <a href="#/tab/home/contact/{{ rep.name }}" class="button button-balanced icon ion-ios-telephone button-contact float-right"></a>
-          <a href="#/tab/home/info/{{ rep.name }}" class="button button-positive icon ion-ios-information button-info float-right"></a>
+          <!--<a ng-click="contact(rep)" class="button button-balanced icon ion-ios-telephone button-contact float-right"></a>-->
+          <button class="button button-balanced icon ion-ios-telephone button-contact float-right" ng-click="contact(rep)"> Contact</button>
+          <button class="button button-positive icon ion-ios-information button-info float-right" ng-click="info(rep)"> Info</button>
         </div>
         <div class="clear-both"></div>
     
       </div>
     </div>
-    
-    <div class="card">
-      <div class="item item-divider">
-        House of Representatives
-      </div>
-      <div class="item item-text-wrap" ng-repeat="rep in houseReps">
-        
-        <div class="float-left width-75">
-          <p><strong>{{ rep.name }}</strong>
-          <p>{{ rep.district }}
-        </div>
-        <div class="float-right width-25">
-          <a href="#/tab/home/contact/{{ rep.name }}" class="button button-balanced icon ion-ios-telephone button-contact float-right"></a>
-          <a href="#/tab/home/info/{{ rep.name }}" class="button button-positive icon ion-ios-information button-info float-right"></a>
-        </div>
-        <div class="clear-both"></div>
-        
-      </div>
-    </div>
-    
+
   </ion-content>
 </ion-view>
 
