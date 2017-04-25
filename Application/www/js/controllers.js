@@ -10,7 +10,7 @@ angular.module('starter.controllers', ['firebase'])
 		// If user data is stored
 		if($window.localStorage['userData']) {
 
-			console.log("Accessing Stored Load Data");
+			//console.log("Accessing Stored Load Data");
 
 			//Load userData
 			$rootScope.userData = JSON.parse($window.localStorage['userData']);
@@ -27,7 +27,7 @@ angular.module('starter.controllers', ['firebase'])
 		}
 		// Else, go to welcome to get user data
 		else {
-			console.log("No Available Load Data");
+			//console.log("No Available Load Data");
 			$timeout(function(){$state.go('welcome');}, 3000);
 		}
 		
@@ -111,6 +111,7 @@ angular.module('starter.controllers', ['firebase'])
   }
   else {
   	// TODO: Use generic silhouette
+  	$scope.imgSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Man_silhouette.svg/703px-Man_silhouette.svg.png'
   }
   if(rep.phones) {
     $scope.phoneNumber = rep.phones[0];
@@ -136,7 +137,7 @@ angular.module('starter.controllers', ['firebase'])
   // stateParam will be a rep data object with appropriate fields
   var rep = $stateParams.rep;
 
-  console.log(rep);
+  //console.log(rep);
 
   // Fill rep info
   $scope.repName = rep.name;
@@ -145,7 +146,9 @@ angular.module('starter.controllers', ['firebase'])
   }
   else {
   	// TODO: Use generic silhouette
+  	$scope.imgSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Man_silhouette.svg/703px-Man_silhouette.svg.png'
   }
+  $scope.office = rep.officeName;
   if(rep.phones) {
     $scope.phoneNumber = rep.phones[0];
   }
