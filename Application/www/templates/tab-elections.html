@@ -1,7 +1,5 @@
 <ion-view view-title="Election Information" id="elections">
   <ion-content class="padding">
-    
-    <!--<button class="button icon ion-gear-a float-right" ng-click="openSettings()"></button>-->
     <!---->
     <!--<h3>Your next election is on {{ nextElectionDate }}.</h3>-->
     <!---->
@@ -13,7 +11,8 @@
   
     <div class="card">
       <div class="item item-divider">
-        My Address
+        <span>My Address</span>
+        <button class="button icon ion-gear-a float-right" ng-click="openSettings()"></button>
       </div>
       <div class="item item-text-wrap">
         {{ userAddress }}
@@ -38,27 +37,6 @@
         <p>{{ election.date }}
       </div>
     </div>
-    
-    
-    <script id="settings-modal.html" type="text/ng-template">
-      <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-balanced">
-          <h1 class="title">Change Settings</h1>
-        </ion-header-bar>
-        
-        <ion-content>
-          <p>Change your address/preferences here! (todo)</p>
-        
-        </ion-content>
-        
-        <div class="bar bar-footer">
-          <div class="button-bar">
-            <button class="button button-large button-assertive" ng-click="closeSettings()">Cancel</button>
-            <button class="button button-large button-positive pull-right" ng-click="saveSettings()">Save</button>
-          </div>
-        </div>
-      </ion-modal-view>
-    </script>
   
   
   </ion-content>

@@ -209,7 +209,7 @@ angular.module('starter.controllers', ['firebase'])
 
 // Settings Modal
 
-	$ionicModal.fromTemplateUrl('settings-modal.html', {
+	$ionicModal.fromTemplateUrl('templates/settings-modal.html', {
  		scope: $scope,
  		animation: 'slide-in-up'
 	}).then(function(modal) {
@@ -217,20 +217,34 @@ angular.module('starter.controllers', ['firebase'])
 	});
 
 	$scope.openSettings = function() {
-	 $scope.settingsModal.show();
-	};
-	$scope.closeSettings = function() {
-	 $scope.settingsModal.hide();
-	};
+    $scope.firstName = $rootScope.userData.firstName;
+    $scope.lastName = $rootScope.userData.lastName;
+    $scope.address = $rootScope.userData.address.line1;
+    $scope.city = $rootScope.userData.address.city;
+    $scope.state = $rootScope.userData.address.state;
+    $scope.zip = $rootScope.userData.address.zip;
+    $scope.settingsModal.show();
+    console.log($rootScope.userData.firstName);
+    console.log($scope.firstName);
+  }
+
 	$scope.saveSettings = function() {
- 		// TODO: Save text fields to user settings (in db or local storage...)
+	  var address = {
+	    line1: $scope.address,
+      state: $scope.state,
+      city: $scope.city,
+      zip: $scope.zip
+    }
+    $rootScope.userData = {'firstName': $scope.firstName,
+      'lastName': $scope.lastName,
+      'address': address};
+    $window.localStorage['userData'] = JSON.stringify($rootScope.userData);
+
  		$scope.settingsModal.hide();
 	};
 // $scope.$on('$destroy', function() {
 //$scope.modal.remove();
 // });
-
-	console.log("Elections Screen Controller initialized");
 })
 
 
