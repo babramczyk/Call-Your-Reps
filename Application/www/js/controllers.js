@@ -185,19 +185,11 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('ElectionsCtrl', function($scope, $rootScope, $ionicModal) {
-	// Actual implementations when these functions are set up
-  // var address = getUserAddress();
-  // $scope.userAddress = address.address + ", " + address.city + " " + address.state + ", " + address.zip;
-  // $scope.pollingPlace = getPollingPlace();
-  // $scope.upcomingElections = getUpcomingElections();
-  // $scope.nextElectionDate = getNextElectionDate().toLocaleDateString('en-US', {
-		// month: 'long',
-		// day: 'numeric',
-		// year: 'numeric' });
+.controller('ElectionsCtrl', function($scope, $rootScope, $ionicModal, $window) {
+	var address = JSON.parse($window.localStorage['userData']).address;
+	$scope.userAddress = address.line1 + ', ' + address.city + ' ' + address.state + ', ' + address.zip;
 
-// Placeholders for now
-	$scope.userAddress = "1234 Main St, Madison WI, 53711";
+  // TODO: Brian; get polling place, upcoming elections with address
   $scope.pollingPlace = "342 Langdon Street (Red Gym)";
   $scope.upcomingElections = [
 		{ name: "2017 Spring Election",
