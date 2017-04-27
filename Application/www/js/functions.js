@@ -92,7 +92,8 @@ function isValidAddress(address) {
  * @param $window
  */
 function validateLocalStorage($window) {
-  if ($window.localStorage.userData == undefined || $window.localStorage.repData == undefined) {
+  console.log($window.localStorage.userData);
+  if ($window.localStorage.userData == undefined || $window.localStorage.repData == undefined || $window.localStorage.userData === 'undefined' || $window.localStorage.repData === 'undefined') {
     return false;
   }
   var userData = JSON.parse($window.localStorage.userData);

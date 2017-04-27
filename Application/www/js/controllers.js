@@ -209,7 +209,7 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('ElectionsCtrl', function($state, $scope, $rootScope, $ionicModal, $window) {
+.controller('ElectionsCtrl', function($state, $scope, $rootScope, $ionicModal, $window, Query) {
   if (!validateLocalStorage($window)) {
     $state.go('welcome', { error: true });
   }
@@ -242,37 +242,70 @@ angular.module('starter.controllers', ['firebase'])
  		animation: 'slide-in-up'
 	}).then(function(modal) {
  		$scope.settingsModal = modal;
+ 		$scope.errorMsg = "";
+ 		$scope.header = "People move. We get it.";
 	});
 
 	$scope.openSettings = function() {
-    $scope.firstName = $rootScope.userData.firstName;
-    $scope.lastName = $rootScope.userData.lastName;
-    $scope.address = $rootScope.userData.address.line1;
-    $scope.city = $rootScope.userData.address.city;
-    $scope.state = $rootScope.userData.address.state;
-    $scope.zip = $rootScope.userData.address.zip;
+	  var userData = JSON.parse($window.localStorage.userData);
+	  console.log(userData);
+
+    $scope.firstName = userData.firstName;
+    $scope.lastName = userData.lastName;
+    $scope.address = userData.address.line1;
+    $scope.city = userData.address.city;
+    $scope.state = userData.address.state;
+    $scope.zip = userData.address.zip;
     $scope.settingsModal.show();
-    console.log($rootScope.userData.firstName);
-    console.log($scope.firstName);
   }
 
 	$scope.saveSettings = function() {
-	  var address = {
-	    line1: $scope.address,
-      state: $scope.state,
-      city: $scope.city,
-      zip: $scope.zip
-    }
-    $rootScope.userData = {'firstName': $scope.firstName,
-      'lastName': $scope.lastName,
-      'address': address};
-    $window.localStorage['userData'] = JSON.stringify($rootScope.userData);
 
- 		$scope.settingsModal.hide();
+    // Hacky way of getting input values
+    var address = {
+      line1: document.getElementById('address').value,
+      state: document.getElementById('state').value,
+      city: document.getElementById('city').value,
+      zip: document.getElementById('zip').value
+    }
+    var userData = {
+      firstName: document.getElementById('first-name').value,
+      lastName: document.getElementById('last-name').value,
+      address: address
+    }
+
+    // Get new rep info
+    var addr = address.line1 + ' ' + address.state + ' ' + address.city + ' ' + address.zip;
+    var promise = Query.getRepData(addr);
+
+    promise.then(function(data) {
+
+      if (data.office) {
+
+        $window.localStorage.userData = JSON.stringify(userData);
+
+        var repData = {
+          office: data.office,
+          twitterHandles: data.twitterHandles
+        };
+
+        $window.localStorage.repData = JSON.stringify(repData);
+
+        $scope.errorMsg = "";
+        $scope.header = "People move. We get it.";
+        $scope.settingsModal.hide();
+      } else {
+        $scope.header = "Uh-oh!";
+        $scope.errorMsg = "Something went wrong with your information. Please enter your full name and a valid US address to continue."
+        //Log error
+        console.log("Invalid Address");
+      }
+    });
+
 	};
-// $scope.$on('$destroy', function() {
-//$scope.modal.remove();
-// });
+  // $scope.$on('$destroy', function() {
+  //   $scope.modal.remove();
+  // });
 })
 
 
