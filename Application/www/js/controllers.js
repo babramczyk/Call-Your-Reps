@@ -75,7 +75,7 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('HomeCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $window) {
+.controller('HomeCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $window, $ionicNavBarDelegate) {
   if (!validateLocalStorage($window)) {
     $state.go('welcome', { error: true });
   }
@@ -83,29 +83,40 @@ angular.module('starter.controllers', ['firebase'])
   $scope.repData = JSON.parse($window.localStorage.repData);
 
 	$scope.contact = function(rep) {
+    $ionicNavBarDelegate.showBackButton(true);
+    $ionicViewSwitcher.nextDirection('forward');
 		$state.go('tab.rep-contact', {rep: rep});
 	}
 
 	$scope.info = function(rep) {
+    $ionicNavBarDelegate.showBackButton(true);
+    $ionicViewSwitcher.nextDirection('forward');
 		$state.go('tab.rep-info', {rep: rep});
 	}
-
-	// $ionicViewSwitcher.nextDirection('forward');
 })
 
 
-.controller('RepContactCtrl', function($state, $scope, $rootScope, $stateParams, $window) {
+.controller('RepContactCtrl', function($state, $scope, $rootScope, $stateParams, $window, $ionicViewSwitcher, $ionicNavBarDelegate) {
   if (!validateLocalStorage($window)) {
     $state.go('welcome', { error: true });
   }
 
   // stateParam will be a rep data object with appropriate fields
   var rep = $stateParams.rep;
+
+  // Check if we got to this page without a representative. If so, send back to home
+  if (rep.name == undefined) {
+    $ionicNavBarDelegate.showBackButton(false);
+    $ionicViewSwitcher.nextDirection('back');
+    $state.go('tab.home');
+  }
+
   
   // Fill in defaults
   $scope.phone = "Call";
   $scope.email = "Email";
-  
+  $scope.userName = JSON.parse($window.localStorage.userData).firstName + ' ' + JSON.parse($window.localStorage.userData).lastName;
+
   // Fill rep info
   $scope.repName = rep.name;
   if(rep.photoUrl) {
@@ -131,11 +142,11 @@ angular.module('starter.controllers', ['firebase'])
   }
   
 
-  $scope.script = "Hello, my name is " + $rootScope.userData.firstName + " and I am in representative " + $scope.repName + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
+  $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.repName + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
 })
 
 
-.controller('RepInfoCtrl', function($state, $scope, $rootScope, $stateParams, $window) {
+.controller('RepInfoCtrl', function($state, $scope, $rootScope, $stateParams, $window, $ionicNavBarDelegate, $ionicViewSwitcher) {
   if (!validateLocalStorage($window)) {
     $state.go('welcome', { error: true });
   }
@@ -143,7 +154,11 @@ angular.module('starter.controllers', ['firebase'])
   // stateParam will be a rep data object with appropriate fields
   var rep = $stateParams.rep;
 
-  //console.log(rep);
+  if (rep.name == undefined) {
+    $ionicNavBarDelegate.showBackButton(false);
+    $ionicViewSwitcher.nextDirection('back');
+    $state.go('tab.home');
+  }
 
   // Fill rep info
   $scope.repName = rep.name;
