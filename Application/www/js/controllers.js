@@ -8,17 +8,7 @@ angular.module('starter.controllers', ['firebase'])
 	//$scope.submit = function() {
 		
 		// If user data is stored
-		if($window.localStorage['userData']) {
-
-			//console.log("Accessing Stored Load Data");
-
-			//Load userData
-			$rootScope.userData = JSON.parse($window.localStorage['userData']);
-			//console.log($rootScope.userData);
-
-			//Load repData
-			$rootScope.repData = JSON.parse($window.localStorage['repData']);
-			//console.log($rootScope.repData);
+		if($window.localStorage.userData) {
 
 			//TODO: Update election data (sometimes update repData? Only if election data changes?)
 
@@ -37,43 +27,46 @@ angular.module('starter.controllers', ['firebase'])
 /////////////////////////////////////
 //    WELCOME SCREEN CONTROLLER    //
 /////////////////////////////////////
-.controller('WelcomeCtrl', function($state, $scope, $rootScope, Query, $window) {
+.controller('WelcomeCtrl', function($state, $scope, $rootScope, $stateParams, Query, $window) {
+  if (!$stateParams.error) {
+    $scope.header = "Welcome";
+    $scope.message = "Enter some information about yourself so we can help find your representatives.";
+  } else {
+    $scope.header = "Uh-oh!";
+    $scope.message = "Something went wrong with your information. Please enter your full name and a valid US address to continue."
+  }
 
 	$scope.submit = function() {
 		setUserName($scope.firstName, $scope.lastName);
 		setUserAddress($scope.address, $scope.city, $scope.state, $scope.zip);
 
 		var addr = $scope.address + ' ' + $scope.city + ' ' + $scope.state + ' ' + $scope.zip;
-	
-		//console.log(addr);
 		
 		var promise = Query.getRepData(addr);
 		
 		promise.then(function(data) {
-			
+
 			//console.log(data);
 
-			if(data.office) {
-				//Save to rootScope and localStorage
-				$rootScope.userData = {'firstName': $scope.firstName,
-					'lastName': $scope.lastName,
-					'address': data.userAddrs};
-				//console.log($rootScope.userData);
+			if (data.office) {
+				var userData = {
+				  firstName: $scope.firstName,
+					lastName: $scope.lastName,
+					address: data.userAddrs
+				};
 
-				$window.localStorage['userData'] = JSON.stringify($rootScope.userData);
+				$window.localStorage.userData = JSON.stringify(userData);
 
-				$rootScope.repData = {'office': data.office,
-					'twitterHandles': data.twitterHandles};
-				//console.log($rootScope.repData);
+				var repData = {
+				  office: data.office,
+					twitterHandles: data.twitterHandles
+				};
 
-				$window.localStorage['repData'] = JSON.stringify($rootScope.repData);
+				$window.localStorage.repData = JSON.stringify(repData);
 
-				//Go to home
 				$state.go('tab.home');
 			}
-			else{
-				//TODO: Display Error message, tell user to re-enter address
-
+			else {
 				//Log error
 				console.log("Invalid Address");
 			}
@@ -82,8 +75,13 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('HomeCtrl', function($scope, $state, $ionicViewSwitcher) {
-	
+.controller('HomeCtrl', function($scope, $rootScope, $state, $ionicViewSwitcher, $window) {
+  if (!validateLocalStorage($window)) {
+    $state.go('welcome', { error: true });
+  }
+
+  $scope.repData = JSON.parse($window.localStorage.repData);
+
 	$scope.contact = function(rep) {
 		$state.go('tab.rep-contact', {rep: rep});
 	}
@@ -96,7 +94,11 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('RepContactCtrl', function($scope, $rootScope, $stateParams) {
+.controller('RepContactCtrl', function($state, $scope, $rootScope, $stateParams, $window) {
+  if (!validateLocalStorage($window)) {
+    $state.go('welcome', { error: true });
+  }
+
   // stateParam will be a rep data object with appropriate fields
   var rep = $stateParams.rep;
   
@@ -133,7 +135,11 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('RepInfoCtrl', function($scope, $rootScope, $stateParams) {
+.controller('RepInfoCtrl', function($state, $scope, $rootScope, $stateParams, $window) {
+  if (!validateLocalStorage($window)) {
+    $state.go('welcome', { error: true });
+  }
+
   // stateParam will be a rep data object with appropriate fields
   var rep = $stateParams.rep;
 
@@ -185,7 +191,11 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('ElectionsCtrl', function($scope, $rootScope, $ionicModal, $window) {
+.controller('ElectionsCtrl', function($state, $scope, $rootScope, $ionicModal, $window) {
+  if (!validateLocalStorage($window)) {
+    $state.go('welcome', { error: true });
+  }
+
 	var address = JSON.parse($window.localStorage['userData']).address;
 	$scope.userAddress = address.line1 + ', ' + address.city + ' ' + address.state + ', ' + address.zip;
 
@@ -248,12 +258,18 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('ActivityCtrl', function($scope, $rootScope) {
+.controller('ActivityCtrl', function($state, $scope, $rootScope, $window) {
+  if (!validateLocalStorage($window)) {
+    $state.go('welcome', { error: true });
+  }
 
 	console.log("Activity Screen Controller initialized");
 })
 
-.controller('FeedsCtrl', function($scope, $rootScope) {
+.controller('FeedsCtrl', function($state, $scope, $rootScope, $window) {
+  if (!validateLocalStorage($window)) {
+    $state.go('welcome', { error: true });
+  }
 
 	console.log("Feeds Screen Controller initialized");
 

@@ -1,7 +1,7 @@
 angular.module('starter.services', [])
 
 .factory('Query', function($http) {
- 
+
   
   var getRepData = function(addr) {
 

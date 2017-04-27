@@ -106,7 +106,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   .state('welcome', {
     url: '/welcome',
     templateUrl: 'templates/welcome.html',
-    controller: 'WelcomeCtrl'
+    controller: 'WelcomeCtrl',
+    params: {
+      error: false
+    }
   })
 
   .state('splash', {
