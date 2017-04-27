@@ -169,6 +169,7 @@ angular.module('starter.controllers', ['firebase'])
   	// TODO: Use generic silhouette
   	$scope.imgSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Man_silhouette.svg/703px-Man_silhouette.svg.png'
   }
+
   $scope.office = rep.officeName;
   if(rep.phones) {
     $scope.phoneNumber = rep.phones[0];
@@ -176,12 +177,14 @@ angular.module('starter.controllers', ['firebase'])
   else {
   	$scope.phoneNumber = "No Phone Listed";
   }
+
   if(rep.emails) {
   	$scope.emailAddress = rep.emails[0];
   }
   else {
   	$scope.emailAddress = "No Email Listed";
   }
+
   $scope.address = "";
   if(rep.address) {  
   	var add = rep.address[0];	
