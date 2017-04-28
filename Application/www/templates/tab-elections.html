@@ -8,7 +8,7 @@
     <!--<button class="button button-positive button-large icon-left ion-android-list center">-->
     <!--See a sample ballot-->
     <!--</button>-->
-  
+
     <div class="card">
       <div class="item item-divider">
         <span>My Address</span>
@@ -18,7 +18,7 @@
         {{ userAddress }}
       </div>
     </div>
-  
+
     <div class="card">
       <div class="item item-divider">
         My Polling Place
@@ -27,7 +27,9 @@
         {{ pollingPlace }}
       </div>
     </div>
-  
+
+    <div id="map" data-tap-disabled="true"></div>
+
     <div class="card">
       <div class="item item-divider">
         Upcoming Elections
@@ -37,7 +39,8 @@
         <p>{{ election.date }}
       </div>
     </div>
-  
-  
+
+<br><br>
+
   </ion-content>
 </ion-view>
