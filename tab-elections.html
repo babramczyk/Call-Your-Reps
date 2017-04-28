@@ -1,0 +1,46 @@
+<ion-view view-title="Election Information" id="elections">
+  <ion-content class="padding">
+    <!---->
+    <!--<h3>Your next election is on {{ nextElectionDate }}.</h3>-->
+    <!---->
+    <!--<h3>Your polling place is located at {{ pollingPlace }}.</h3>-->
+    <!---->
+    <!--<button class="button button-positive button-large icon-left ion-android-list center">-->
+    <!--See a sample ballot-->
+    <!--</button>-->
+
+    <div class="card">
+      <div class="item item-divider">
+        <span>My Address</span>
+        <button class="button icon ion-gear-a float-right" ng-click="openSettings()"></button>
+      </div>
+      <div class="item item-text-wrap">
+        {{ userAddress }}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        My Polling Place
+      </div>
+      <div class="item item-text-wrap">
+        {{ pollingPlace }}
+      </div>
+    </div>
+
+    <div id="map" data-tap-disabled="true"></div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Upcoming Elections
+      </div>
+      <div class="item item-text-wrap" ng-repeat="election in upcomingElections">
+        <p>{{ election.name }}
+        <p>{{ election.date }}
+      </div>
+    </div>
+
+<br><br>
+
+  </ion-content>
+</ion-view>
