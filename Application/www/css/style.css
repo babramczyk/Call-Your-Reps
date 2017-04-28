@@ -33,3 +33,13 @@ a.center { display: table !important; }
 .header-wrap {
     margin-bottom: 2%;
 }
+
+#map {
+  margin: auto;
+  width: 50%;
+  height: 50%;
+}
+
+.scroll {
+  height: 100%;
+}
