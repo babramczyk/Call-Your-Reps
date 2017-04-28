@@ -6,7 +6,7 @@ angular.module('starter.controllers', ['firebase'])
 .controller('SplashCtrl', function($state, $scope, $window, $rootScope, $timeout) {
 
 	//$scope.submit = function() {
-		
+
 		// If user data is stored
 		if($window.localStorage.userData) {
 
@@ -20,7 +20,7 @@ angular.module('starter.controllers', ['firebase'])
 			//console.log("No Available Load Data");
 			$timeout(function(){$state.go('welcome');}, 3000);
 		}
-		
+
 	//}
 })
 
@@ -41,9 +41,9 @@ angular.module('starter.controllers', ['firebase'])
 		setUserAddress($scope.address, $scope.city, $scope.state, $scope.zip);
 
 		var addr = $scope.address + ' ' + $scope.city + ' ' + $scope.state + ' ' + $scope.zip;
-		
+
 		var promise = Query.getRepData(addr);
-		
+
 		promise.then(function(data) {
 
 			//console.log(data);
@@ -111,7 +111,7 @@ angular.module('starter.controllers', ['firebase'])
     $state.go('tab.home');
   }
 
-  
+
   // Fill in defaults
   $scope.phone = "Call";
   $scope.email = "Email";
@@ -140,7 +140,7 @@ angular.module('starter.controllers', ['firebase'])
   	// TODO: Make button unavailable
   	$scope.email = "NO EMAIL LISTED";
   }
-  
+
 
   $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.repName + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
 })
@@ -186,12 +186,12 @@ angular.module('starter.controllers', ['firebase'])
   }
 
   $scope.address = "";
-  if(rep.address) {  
-  	var add = rep.address[0];	
+  if(rep.address) {
+  	var add = rep.address[0];
   	for(var line in add) {
   	   $scope.address += (add[line] + '\n');
   	}
-  	
+
   }
   else {
   	$scope.address = "No Address Listed";
@@ -209,7 +209,7 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 
-.controller('ElectionsCtrl', function($state, $scope, $rootScope, $ionicModal, $window, Query) {
+.controller('ElectionsCtrl', function($state, $scope, $rootScope, $ionicModal, $window, $ionicLoading, $compile, Query) {
   if (!validateLocalStorage($window)) {
     $state.go('welcome', { error: true });
   }
@@ -218,7 +218,7 @@ angular.module('starter.controllers', ['firebase'])
 	$scope.userAddress = address.line1 + ', ' + address.city + ' ' + address.state + ', ' + address.zip;
 
   // TODO: Brian; get polling place, upcoming elections with address
-  $scope.pollingPlace = "342 Langdon Street (Red Gym)";
+  $scope.pollingPlace = "306 N Brooks St, Madison, WI 53715";
   $scope.upcomingElections = [
 		{ name: "2017 Spring Election",
 			date: "April 4, 2017",
@@ -234,6 +234,46 @@ angular.module('starter.controllers', ['firebase'])
 			day: 'numeric',
 		 	year: 'numeric' });
 
+  function initialize() {
+    var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
+
+    var mapOptions = {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"),
+      mapOptions);
+    var geocoder = new google.maps.Geocoder();
+
+    geocodeAddress(geocoder, map);
+
+    $scope.map = map;
+  }
+  //geocode, to get coordinates from address and mark on map
+  function geocodeAddress(geocoder, resultsMap) {
+    var address = $scope.pollingPlace;//document.getElementbyId('address').value;
+    geocoder.geocode({'address': $scope.pollingPlace}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+        });
+        var contentString = "<div><a ng-click='clickTest()'>{{pollingPlace}}</a></div>";
+        var compiled = $compile(contentString)($scope);
+
+        var infowindow = new google.maps.InfoWindow({
+          content: compiled[0]
+        });
+      }
+    })
+  }
+  ionic.Platform.ready(initialize);
 
 // Settings Modal
 
