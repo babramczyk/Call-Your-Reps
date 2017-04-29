@@ -364,5 +364,14 @@ angular.module('starter.controllers', ['firebase'])
 
 	console.log("Feeds Screen Controller initialized");
 
+  TwitterREST.sync().then(function(tweets){
+    console.log(tweets);
+    $scope.tweets = tweets.statuses;
+  });
+
+  $scope.innapBrowser = function (value) {
+    window.open(value, '_blank');
+  };
+
 	//$rootScope.repData.twitterHandles is a string array of twitter handles
 })
