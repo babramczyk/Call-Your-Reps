@@ -140,8 +140,8 @@ angular.module('starter.services', [])
 
     var self = this;
     var authorization = null;
-    var consumerKey = "you Consumer Key (API Key) here";
-    var consumerSecret = "you Consumer Secret (API Secret) here";
+    var consumerKey = "IpU9pbmcDVVL82A21Soz4KPqc";
+    var consumerSecret = "W8qOfUvY7dx73LpCtPo9r6D1eACSUMkyFDnmS1JYRf0LW4AYrv";
     var twitterTokenURL = "https://api.twitter.com/oauth2/token";
     var twitterStreamURL = "https://api.twitter.com/1.1/search/tweets.json?q="; //url query, this one is for hash tags
     var qValue = "%23belgrade"; //hash tag %23 is for #
@@ -155,7 +155,7 @@ angular.module('starter.services', [])
           method: 'GET',
           url: twitterStreamURL+qValue+numberOfTweets,
           headers: {
-            'Authorization': 'Bearer '+authorization.access_token,
+            'Authorization': 'Bearer '+ 781310648-qJ2awr3HpenmlrUgGLNyEHJeYtA3r18WWQITp0UM,
             'Content-Type': 'application/json'
           },
           cache:true

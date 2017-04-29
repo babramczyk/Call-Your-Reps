@@ -357,7 +357,7 @@ angular.module('starter.controllers', ['firebase'])
 	console.log("Activity Screen Controller initialized");
 })
 
-.controller('FeedsCtrl', function($state, $scope, $rootScope, $window) {
+.controller('FeedsCtrl', function($scope, $rootScope, TwitterREST, $window) {
   if (!validateLocalStorage($window)) {
     $state.go('welcome', { error: true });
   }
