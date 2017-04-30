@@ -56,3 +56,8 @@ a.center { display: table !important; }
 .twtr-hashtag, .twtr-hyperlink, .twtr-atreply {
   color: #226699;
 }
+
+.splash_image {
+  display: flex;
+  justify-content: center;
+}
