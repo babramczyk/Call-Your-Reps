@@ -5,10 +5,8 @@ angular.module('starter.controllers', ['firebase'])
 /////////////////////////////////////
 .controller('SplashCtrl', function($state, $scope, $window, $rootScope, $timeout) {
 
-	//$scope.submit = function() {
-
 		// If user data is stored
-		if($window.localStorage.userData) {
+		if(validateLocalStorage()) {
 
 			//TODO: Update election data (sometimes update repData? Only if election data changes?)
 
