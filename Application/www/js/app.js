@@ -24,9 +24,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $compileProvider) {
 
-  /*$compileProvider.directive('compile', function ($compile) {
+  $compileProvider.directive('compile', function ($compile) {
     // directive factory creates a link function
     return function (scope, element, attrs) {
       scope.$watch(
@@ -47,7 +47,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       );
     };
-  });*/
+  });
 
 
   $stateProvider

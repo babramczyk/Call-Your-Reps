@@ -140,9 +140,9 @@ angular.module('starter.services', [])
 
     var self = this;
     var authorization = null;
-    var consumerKey = "IpU9pbmcDVVL82A21Soz4KPqc";
+    var consumerKey = "IpU9pbmcDVVL82A21Soz4KPqc"; 
     var consumerSecret = "W8qOfUvY7dx73LpCtPo9r6D1eACSUMkyFDnmS1JYRf0LW4AYrv";
-    var twitterTokenURL = "https://api.twitter.com/oauth2/token";
+    var twitterTokenURL = "https://api.twitter.com/oauth2/781310648-qJ2awr3HpenmlrUgGLNyEHJeYtA3r18WWQITp0UM";
     var twitterStreamURL = "https://api.twitter.com/1.1/search/tweets.json?q="; //url query, this one is for hash tags
     var qValue = "%23belgrade"; //hash tag %23 is for #
     var numberOfTweets = "&count=10";
@@ -155,7 +155,7 @@ angular.module('starter.services', [])
           method: 'GET',
           url: twitterStreamURL+qValue+numberOfTweets,
           headers: {
-            'Authorization': 'Bearer '+ 781310648-qJ2awr3HpenmlrUgGLNyEHJeYtA3r18WWQITp0UM,
+            'Authorization': 'Bearer '+ '781310648-qJ2awr3HpenmlrUgGLNyEHJeYtA3r18WWQITp0UM',
             'Content-Type': 'application/json'
           },
           cache:true
@@ -182,7 +182,9 @@ angular.module('starter.services', [])
       base64Encoded = Base64.encode(combined);
 
       // Get the token
-      $http.post(twitterTokenURL,"grant_type=client_credentials", {headers: {'Authorization': 'Basic ' + base64Encoded, 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}}).
+      $http.post(twitterTokenURL,"grant_type=client_credentials",
+        {headers: {'Authorization': 'Basic ' + base64Encoded,
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'}}).
       success(function(data, status, headers, config) {
         authorization = data;
         if (data && data.token_type && data.token_type === "bearer") {

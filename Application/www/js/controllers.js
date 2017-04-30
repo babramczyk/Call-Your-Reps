@@ -357,13 +357,7 @@ angular.module('starter.controllers', ['firebase'])
 	console.log("Activity Screen Controller initialized");
 })
 
-.controller('FeedsCtrl', function($scope, $rootScope, TwitterREST, $window) {
-  if (!validateLocalStorage($window)) {
-    $state.go('welcome', { error: true });
-  }
-
-	console.log("Feeds Screen Controller initialized");
-
+.controller('FeedsCtrl', function($state, $scope, TwitterREST) {
   TwitterREST.sync().then(function(tweets){
     console.log(tweets);
     $scope.tweets = tweets.statuses;
@@ -372,6 +366,4 @@ angular.module('starter.controllers', ['firebase'])
   $scope.innapBrowser = function (value) {
     window.open(value, '_blank');
   };
-
-	//$rootScope.repData.twitterHandles is a string array of twitter handles
 })
