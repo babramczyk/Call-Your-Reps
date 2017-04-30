@@ -217,68 +217,68 @@ angular.module('starter.controllers', ['firebase'])
     $state.go('welcome', { error: true });
   }
 
-  $scope.$on('$ionicView.enter', function() {
-    var address = JSON.parse($window.localStorage['userData']).address;
-    $scope.userAddress = address.line1 + ', ' + address.city + ' ' + address.state + ', ' + address.zip;
+  var address = JSON.parse($window.localStorage['userData']).address;
+  $scope.userAddress = address.line1 + ', ' + address.city + ' ' + address.state + ', ' + address.zip;
 
-    // TODO: Brian; get polling place, upcoming elections with address
-    $scope.pollingPlace = "306 N Brooks St, Madison, WI 53715";
-    $scope.upcomingElections = [
-      { name: "2017 Spring Election",
-        date: "April 4, 2017",
-        ballot: 0 // Unique ID to pass as stateParam to find correct ballot
-      }, {
-        name: "2018 Spring Primary",
-        date: "February 4, 2017",
-        ballot: 1
+  // TODO: Brian; get polling place, upcoming elections with address
+  $scope.pollingPlace = "306 N Brooks St, Madison, WI 53715";
+  $scope.upcomingElections = [
+    { name: "2017 Spring Election",
+      date: "April 4, 2017",
+      ballot: 0 // Unique ID to pass as stateParam to find correct ballot
+    }, {
+      name: "2018 Spring Primary",
+      date: "February 4, 2017",
+      ballot: 1
+    }
+  ];
+
+  $scope.nextElectionDate = new Date(2017, 4, 3).toLocaleDateString('en-US',
+    { month: 'long',
+      day: 'numeric',
+      year: 'numeric' });
+
+  function initialize() {
+    var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
+
+    var mapOptions = {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    var map = new google.maps.Map(document.getElementById("map"),
+      mapOptions);
+    var geocoder = new google.maps.Geocoder();
+
+    geocodeAddress(geocoder, map);
+
+    $scope.map = map;
+  }
+  //geocode, to get coordinates from address and mark on map
+  function geocodeAddress(geocoder, resultsMap) {
+    var address = $scope.pollingPlace;//document.getElementbyId('address').value;
+    geocoder.geocode({'address': $scope.pollingPlace}, function(results, status) {
+      if (status === 'OK') {
+        resultsMap.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map,marker);
+        });
+        var contentString = "<div><a ng-click='clickTest()'>{{pollingPlace}}</a></div>";
+        var compiled = $compile(contentString)($scope);
+
+        var infowindow = new google.maps.InfoWindow({
+          content: compiled[0]
+        });
       }
-    ];
-    $scope.nextElectionDate = new Date(2017, 4, 3).toLocaleDateString('en-US',
-      { month: 'long',
-        day: 'numeric',
-        year: 'numeric' });
+    })
+  }
 
-    function initialize() {
-      var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
-
-      var mapOptions = {
-        center: myLatlng,
-        zoom: 16,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-
-      var map = new google.maps.Map(document.getElementById("map"),
-        mapOptions);
-      var geocoder = new google.maps.Geocoder();
-
-      geocodeAddress(geocoder, map);
-
-      $scope.map = map;
-    }
-    //geocode, to get coordinates from address and mark on map
-    function geocodeAddress(geocoder, resultsMap) {
-      var address = $scope.pollingPlace;//document.getElementbyId('address').value;
-      geocoder.geocode({'address': $scope.pollingPlace}, function(results, status) {
-        if (status === 'OK') {
-          resultsMap.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({
-            map: resultsMap,
-            position: results[0].geometry.location
-          });
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map,marker);
-          });
-          var contentString = "<div><a ng-click='clickTest()'>{{pollingPlace}}</a></div>";
-          var compiled = $compile(contentString)($scope);
-
-          var infowindow = new google.maps.InfoWindow({
-            content: compiled[0]
-          });
-        }
-      })
-    }
-    ionic.Platform.ready(initialize);
-  })
+  ionic.Platform.ready(initialize);
 
 
   // Settings Modal
@@ -351,6 +351,8 @@ angular.module('starter.controllers', ['firebase'])
         //Log error
         console.log("Invalid Address");
       }
+
+      initialize();
     });
 
 	};
