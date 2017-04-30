@@ -374,7 +374,7 @@ angular.module('starter.controllers', ['firebase'])
 	console.log("Activity Screen Controller initialized");
 })
 
-.controller('FeedsCtrl', function($state, $scope, TwitterREST) {
+.controller('FeedsCtrl', function($state, $scope, TwitterREST, $window) {
   $scope.$on('$ionicView.enter', function() {
     $scope.repData = JSON.parse($window.localStorage.repData);
   })
