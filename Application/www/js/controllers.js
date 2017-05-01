@@ -357,13 +357,49 @@ angular.module('starter.controllers', ['firebase'])
 	console.log("Activity Screen Controller initialized");
 })
 
-.controller('FeedsCtrl', function($state, $scope, TwitterREST) {
-  TwitterREST.sync().then(function(tweets){
-    console.log(tweets);
-    $scope.tweets = tweets.statuses;
-  });
+.controller('FeedsCtrl', function($state, $scope, $ionicPlatform, $twitterApi, $cordovaOauth, $window) {
+  if (!validateLocalStorage($window)) {
+    $state.go('welcome', { error: true });
+  }
 
-  $scope.innapBrowser = function (value) {
-    window.open(value, '_blank');
+  $scope.showHomeTimeline = function() {
+    $twitterApi.getHomeTimeline().then(function(data) {
+      $scope.home_timeline = data;
+    });
   };
+
+  $scope.doRefresh = function() {
+    $scope.showHomeTimeline();
+    $scope.$broadcast('scroll.refreshComplete');
+  };
+
+  $scope.correctTimestring = function(string) {
+    return new Date(Date.parse(string));
+  };
+
+  setTimeout( function () {
+    var twitterKey = "STORAGE.TWITTER.KEY";
+    var clientId = "IpU9pbmcDVVL82A21Soz4KPqc";
+    var clientSecret = "W8qOfUvY7dx73LpCtPo9r6D1eACSUMkyFDnmS1JYRf0LW4AYrv";
+    var myToken = '';
+
+    $scope.tweet = {};
+
+    $ionicPlatform.ready(function() {
+      myToken = JSON.parse(window.localStorage.getItem(twitterKey));
+      if (myToken === '' || myToken === null) {
+        $cordovaOauth.twitter(clientId, clientSecret).then(function (succ) {
+          myToken = succ;
+          window.localStorage.setItem(twitterKey, JSON.stringify(succ));
+          $twitterApi.configure(clientId, clientSecret, succ);
+          $scope.showHomeTimeline();
+        }, function(error) {
+          console.log(error);
+        });
+      } else {
+        $twitterApi.configure(clientId, clientSecret, myToken);
+        $scope.showHomeTimeline();
+      }
+    });
+  }, 3000)
 })
