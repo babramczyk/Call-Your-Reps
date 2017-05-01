@@ -4,22 +4,28 @@
     <!-- TODO: Possibly revise styling if we have no more information to put in each card. Currently, a lot of wasted space -->
   
 
-    <div class="card" ng-repeat="office in repData.office">
-      <div class="item item-divider">
-        {{office.name}}
-      </div>
-      <div class="item item-text-wrap" ng-repeat="rep in office.holders">
+    <div class="card rep-card stable-transparent" ng-repeat="office in repData.office">
+      <!--<div class="item item-divider">-->
+        <!--{{ office.name }}-->
+      <!--</div>-->
+      <div class="item item-text-wrap stable-transparent" ng-repeat="rep in office.holders">
+        
+        <div class="rep-card-left float-left {{ rep.party }}">
+          <div>{{ rep.party.charAt(0) }}</div>
+        </div>
       
-        <div class="float-left width-75">
-          <p><strong>{{ rep.name }}</strong>
-          <p>Party: {{ rep.party }}
+        <div class="rep-card-middle">
+          <p class="rep-name"><strong>{{ rep.name }}</strong>
+          <p class="office-name">{{ office.name.toUpperCase() }}
         </div>
-        <div class="float-right width-25">
+        
+        <div class="rep-card-right stable">
           <!--<a ng-click="contact(rep)" class="button button-balanced icon ion-ios-telephone button-contact float-right"></a>-->
-          <button class="button button-balanced icon ion-ios-telephone button-contact float-right" ng-click="contact(rep)"> Contact</button>
-          <button class="button button-positive icon ion-ios-information button-info float-right" ng-click="info(rep)"> Info</button>
+          <button class="button button-energized icon ion-ios-telephone button-contact float-right" ng-click="contact(rep)"></button>
+          <button class="button button-calm ion-ios-information button-info float-right" ng-click="info(rep)"></button>
         </div>
-        <div class="clear-both"></div>
+        
+        <!--<div class="clear-both"></div>-->
     
       </div>
     </div>

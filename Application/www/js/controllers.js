@@ -5,10 +5,8 @@ angular.module('starter.controllers', ['firebase'])
 /////////////////////////////////////
 .controller('SplashCtrl', function($state, $scope, $window, $rootScope, $timeout) {
 
-	//$scope.submit = function() {
-
 		// If user data is stored
-		if($window.localStorage.userData) {
+		if(validateLocalStorage($window)) {
 
 			//TODO: Update election data (sometimes update repData? Only if election data changes?)
 
@@ -80,7 +78,10 @@ angular.module('starter.controllers', ['firebase'])
     $state.go('welcome', { error: true });
   }
 
-  $scope.repData = JSON.parse($window.localStorage.repData);
+  // Will run every time the home tab is opened. This way, can update reps dynamically if user address is changed
+  $scope.$on('$ionicView.enter', function() {
+    $scope.repData = JSON.parse($window.localStorage.repData);
+  })
 
 	$scope.contact = function(rep) {
     $ionicNavBarDelegate.showBackButton(true);
@@ -214,25 +215,26 @@ angular.module('starter.controllers', ['firebase'])
     $state.go('welcome', { error: true });
   }
 
-	var address = JSON.parse($window.localStorage['userData']).address;
-	$scope.userAddress = address.line1 + ', ' + address.city + ' ' + address.state + ', ' + address.zip;
+  var address = JSON.parse($window.localStorage['userData']).address;
+  $scope.userAddress = address.line1 + ', ' + address.city + ' ' + address.state + ', ' + address.zip;
 
   // TODO: Brian; get polling place, upcoming elections with address
   $scope.pollingPlace = "306 N Brooks St, Madison, WI 53715";
   $scope.upcomingElections = [
-		{ name: "2017 Spring Election",
-			date: "April 4, 2017",
-			ballot: 0 // Unique ID to pass as stateParam to find correct ballot
-		}, {
+    { name: "2017 Spring Election",
+      date: "April 4, 2017",
+      ballot: 0 // Unique ID to pass as stateParam to find correct ballot
+    }, {
       name: "2018 Spring Primary",
       date: "February 4, 2017",
       ballot: 1
-		}
-	];
-	$scope.nextElectionDate = new Date(2017, 4, 3).toLocaleDateString('en-US',
- 		{ month: 'long',
-			day: 'numeric',
-		 	year: 'numeric' });
+    }
+  ];
+
+  $scope.nextElectionDate = new Date(2017, 4, 3).toLocaleDateString('en-US',
+    { month: 'long',
+      day: 'numeric',
+      year: 'numeric' });
 
   function initialize() {
     var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
@@ -273,9 +275,11 @@ angular.module('starter.controllers', ['firebase'])
       }
     })
   }
+
   ionic.Platform.ready(initialize);
 
-// Settings Modal
+
+  // Settings Modal
 
 	$ionicModal.fromTemplateUrl('templates/settings-modal.html', {
  		scope: $scope,
@@ -333,6 +337,11 @@ angular.module('starter.controllers', ['firebase'])
 
         $scope.errorMsg = "";
         $scope.header = "People move. We get it.";
+
+        // Update elections page info
+        $scope.userAddress = addr;
+        // TODO: Brian, put code for getting polling place here (should be same as when controller is initialized)
+
         $scope.settingsModal.hide();
       } else {
         $scope.header = "Uh-oh!";
@@ -340,6 +349,8 @@ angular.module('starter.controllers', ['firebase'])
         //Log error
         console.log("Invalid Address");
       }
+
+      initialize();
     });
 
 	};
@@ -354,6 +365,10 @@ angular.module('starter.controllers', ['firebase'])
     $state.go('welcome', { error: true });
   }
 
+  $scope.$on('$ionicView.enter', function() {
+    $scope.repData = JSON.parse($window.localStorage.repData);
+  })
+
 	console.log("Activity Screen Controller initialized");
 })
 
@@ -367,6 +382,12 @@ angular.module('starter.controllers', ['firebase'])
       $scope.home_timeline = data;
     });
   };
+
+  $scope.submitTweet = function() {
+    $twitterApi.postStatusUpdate($scope.tweet.message).then(function(result) {
+      $scope.showHomeTimeline();
+    });
+  }
 
   $scope.doRefresh = function() {
     $scope.showHomeTimeline();
@@ -402,4 +423,5 @@ angular.module('starter.controllers', ['firebase'])
       }
     });
   }, 3000)
-})
+
+  });

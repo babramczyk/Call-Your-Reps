@@ -1,4 +1,17 @@
 {
-  "name": "tabs",
-  "app_id": "e64b3e96"
+  "name": "Call Your Reps",
+  "app_id": "543538ae",
+  "watch": {
+    "sass": [
+      "scss/**/*.scss"
+    ],
+    "html": [
+      "www/**/*.html"
+    ],
+    "livereload": [
+      "www/**/*.html",
+      "www/**/*.js",
+      "www/**/*.css"
+    ]
+  }
 }

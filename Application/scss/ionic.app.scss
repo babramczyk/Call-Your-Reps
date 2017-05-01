@@ -15,9 +15,184 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+$positive: #172A85 !default;
+$assertive: #A81915 !default;
+$calm: #279B9C !default;
+$energized: #0B911A !default;
+$royal: #4E3A57 !default;
+$gray: #AAA;
+$stable-transparent: rgba(248, 248, 248, 0.86);
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+
+// ---------- CUSTOM CSS ---------- //
+
+.hidden { display: none; }
+.center { margin-left: auto; margin-right: auto; }
+.button.center { display: block; margin-top: 5%; margin-bottom: 5%; }
+a.center { display: table !important; }
+.clear-both { clear: both;}
+.float-left { float: left; }
+.float-right { float: right; }
+.width-45 { width: 45%; }
+.width-75 { width: 75%; }
+.width-25 { width: 25%; }
+.width-50 { width: 50%; }
+.width-15 { width: 15%; }
+
+ion-content {
+  background-color: $royal;
+}
+
+.tab-nav {
+  background-color: $stable;
+
+  //.tab-item {
+  //  color: $stable;
+  //}
+}
+
+.bar.bar-header {
+  background-color: rgba(100, 100, 100, .1);
+}
+
+.stable-transparent {
+  background-color: $stable-transparent;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: $stable;
+}
+
+//.card {
+//  border-radius: 20px;
+//}
+
+//.item p {
+//  color: #444;
+//  font-size: 16px;
+//}
+
+/***** Home Page *****/
+.button-contact {
+  margin-bottom: 10px;
+}
+
+.button {
+  min-width: 43px;
+}
+
+.rep-photo {
+  float: left;
+  width: 25%;
+  margin-right: 35px;
+  border-radius: 1000px;
+  max-width:300px;
+}
+
+.header-wrap {
+  margin-bottom: 2%;
+}
+
+#map {
+  margin: auto;
+  width: 50%;
+  height: 50%;
+}
+
+.scroll {
+  height: 100%;
+}
+
+.item p {
+  white-space: pre-wrap;
+}
+.item small {
+  color: #8899a6;
+}
+.item .time:before {
+  content: "\00b7";
+}
+.twtr-hashtag, .twtr-hyperlink, .twtr-atreply {
+  color: #226699;
+}
+
+.splash_image {
+  display: flex;
+  justify-content: center;
+}
+
+.rep-card {
+  //border-radius: 20px 20px 20px 20px;
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .item:first-child {
+    //border-radius: 20px 20px 0 0;
+  }
+
+  .item:last-child {
+    //border-radius: 0 0 20px 20px;
+  }
+}
+
+.rep-card-left {
+  width: 15%;
+  font-size: 30px;
+  border-radius: 4px;
+  display: flex;
+  align-self: center;
+  min-height: 50px;
+  flex-basis: 15%;
+
+  div {
+    color: #fff;
+    text-align: center;
+    margin: auto;
+  }
+}
+
+.rep-card-middle {
+  width: 60%;
+}
+
+.rep-card-middle .rep-name {
+  font-size: 19px;
+  text-align: center;
+}
+
+.rep-card-middle .office-name {
+  font-size: 12px;
+  text-align: center;
+}
+
+.rep-card-right {
+  flex-basis: 20%;
+}
+
+.rep-card-right.button {
+  color: #FFF !important;
+}
+
+.Republican {
+  background-color: $assertive;
+  color: #f8f8f8;
+}
+
+.Democratic {
+  background-color: $positive;
+  color: #f8f8f8;
+}
+
+.Nonpartisan, .Unknown {
+  background-color: $dark;
+}
