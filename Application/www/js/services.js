@@ -155,11 +155,12 @@ angular.module('starter.services', [])
           method: 'GET',
           url: twitterStreamURL+qValue+numberOfTweets,
           headers: {
-            'Authorization': 'Bearer '+ '781310648-qJ2awr3HpenmlrUgGLNyEHJeYtA3r18WWQITp0UM',
+            'Authorization': 'Bearer '+ authorization.access_token,
             'Content-Type': 'application/json'
           },
           cache:true
         };
+        console.log("req1 " + req1);
         // make request with the token
         $http(req1).
         success(function(data, status, headers, config) {

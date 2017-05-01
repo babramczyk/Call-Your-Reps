@@ -361,6 +361,10 @@ angular.module('starter.controllers', ['firebase'])
 
 
 .controller('ActivityCtrl', function($state, $scope, $rootScope, $window) {
+
+
+
+
   if (!validateLocalStorage($window)) {
     $state.go('welcome', { error: true });
   }
@@ -372,8 +376,17 @@ angular.module('starter.controllers', ['firebase'])
 	console.log("Activity Screen Controller initialized");
 })
 
-.controller('FeedsCtrl', function($state, $scope, $ionicPlatform, $twitterApi, $cordovaOauth, $window) {
-  if (!validateLocalStorage($window)) {
+.controller('FeedsCtrl', function($state, $scope, $ionicPlatform, $twitterApi, $cordovaOauth, $window, TwitterREST) {
+
+    TwitterREST.sync().then(function(tweets) {
+      console.log(tweets);
+      $scope.tweets = tweets.statuses;
+    });
+
+    $scope.innapBrowser = function (value) {
+      window.open(value, '_blank');
+    };
+  /*if (!validateLocalStorage($window)) {
     $state.go('welcome', { error: true });
   }
 
@@ -382,12 +395,6 @@ angular.module('starter.controllers', ['firebase'])
       $scope.home_timeline = data;
     });
   };
-
-  $scope.submitTweet = function() {
-    $twitterApi.postStatusUpdate($scope.tweet.message).then(function(result) {
-      $scope.showHomeTimeline();
-    });
-  }
 
   $scope.doRefresh = function() {
     $scope.showHomeTimeline();
@@ -402,13 +409,20 @@ angular.module('starter.controllers', ['firebase'])
     var twitterKey = "STORAGE.TWITTER.KEY";
     var clientId = "IpU9pbmcDVVL82A21Soz4KPqc";
     var clientSecret = "W8qOfUvY7dx73LpCtPo9r6D1eACSUMkyFDnmS1JYRf0LW4AYrv";
-    var myToken = '';
+    var myToken = '781310648-qJ2awr3HpenmlrUgGLNyEHJeYtA3r18WWQITp0UM';
 
     $scope.tweet = {};
 
+
+
     $ionicPlatform.ready(function() {
-      myToken = JSON.parse(window.localStorage.getItem(twitterKey));
-      if (myToken === '' || myToken === null) {
+
+      $twitterApi.configure(clientId, clientSecret, myToken);
+      $scope.showHomeTimeline();
+      console.log(data);
+
+      //imyToken = JSON.parse(window.localStorage.getItem(twitterKey));
+      /*if (myToken === '' || myToken === null) {
         $cordovaOauth.twitter(clientId, clientSecret).then(function (succ) {
           myToken = succ;
           window.localStorage.setItem(twitterKey, JSON.stringify(succ));
@@ -422,6 +436,6 @@ angular.module('starter.controllers', ['firebase'])
         $scope.showHomeTimeline();
       }
     });
-  }, 3000)
+  }, 3000)*/
 
   });

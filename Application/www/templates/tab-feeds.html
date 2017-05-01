@@ -1,16 +1,8 @@
 <ion-view view-title="Twitter Feed">
     <ion-content class="has-header padding">
-      <div class="list">
-        <div class="item item-input-inset">
-          <label class="item-input-wrapper">
-            <input type="text" placeholder="My tweet..." ng-model="tweet.message" ng-maxlength="140">
-          </label>
-          <button class="button button-small" ng-click="submitTweet()">
-            Tweet
-          </button>
-        </div>
-      </div>
       <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+      <p> This is a test </p>
 
       <div ng-show="home_timeline.length == 0">Loading tweets...</div>
 
@@ -27,5 +19,6 @@
         </div>
 
       </div>
+
     </ion-content>
 </ion-view>
