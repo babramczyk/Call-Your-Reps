@@ -19,6 +19,8 @@
       </div>
     </div>
 
+    <div id="map" data-tap-disabled="true"></div>
+
     <!-- Shows if there is election data -->
     <div ng-hide="noElections" class="ng-hide">
       <div class="card">
@@ -30,7 +32,7 @@
         </div>
       </div>
 
-      <div id="map" data-tap-disabled="true"></div>
+      
 
       <div class="card">
         <div class="item item-divider">
@@ -38,7 +40,16 @@
         </div>
         <div class="item item-text-wrap" ng-repeat="election in upcomingElections">
           <p>{{ election.name }}</p>
-          <p>{{ election.date }}</p>
+          <p>{{ election.electionDay }}</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="item item-divider">
+          Offices and Items up for Vote
+        </div>
+        <div class="item item-text-wrap" ng-repeat="contest in contests">
+          <p>{{ contest.office }}</p>
         </div>
       </div>
     </div>
@@ -46,10 +57,11 @@
     <!-- Shows if there is no election data -->
     <div ng-hide="noMessage" class="ng-hide">
       <div class="card">
-        <div class="item item-text-wrap">No upcoming elections</div>
+        <div class="item item-divider">Upcoming Elections</div>
+        <div class="item item-text-wrap">No upcoming elections found</div>
       </div>
 
-      <div align="center"><button class="button button-calm" ng-click="spoofData())">(TESTING) Generate election data</button><div>
+      <div align="center"><button class="button button-calm" ng-click="spoofData()">(TESTING) Generate election data</button><div>
     </div>
 
 <br><br>

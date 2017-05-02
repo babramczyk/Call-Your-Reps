@@ -1,16 +1,11 @@
 //---------- Config ----------//
-
+/**
+ * Clears localStorage
+ */ 
 function clearLocalStorage($window) {
   $window.localStorage.clear();
 }
 
-/**
- * Checks to see if a given address JSON object is valid.
- * @param address
- */
-function isValidAddress(address) {
-
-}
 
 /**
  * Returns true if we have a valid name and address for the user in local storage,
@@ -19,7 +14,7 @@ function isValidAddress(address) {
  * @param $window
  */
 function validateLocalStorage($window) {
-  console.log($window.localStorage.userData);
+  //console.log($window.localStorage.userData);
   if ($window.localStorage.userData == undefined || $window.localStorage.repData == undefined || $window.localStorage.userData === 'undefined' || $window.localStorage.repData === 'undefined') {
     return false;
   }
