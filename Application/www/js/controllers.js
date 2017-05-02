@@ -3,12 +3,33 @@ angular.module('starter.controllers', ['firebase'])
 /////////////////////////////////////
 //     SPLASH SCREEN CONTROLLER    //
 /////////////////////////////////////
-.controller('SplashCtrl', function($state, $scope, $window, $rootScope, $timeout) {
+.controller('SplashCtrl', function($state, $scope, $window, $rootScope, $timeout, Query) {
 
 		// If user data is stored
 		if(validateLocalStorage($window)) {
 
+      var address = JSON.parse($window.localStorage['userData']).address;
+      var addr = address.line1 + ', ' + address.city + ', ' + address.state + ' ' + address.zip; 
+
 			//TODO: Update election data (sometimes update repData? Only if election data changes?)
+      var promise = Query.getElectData(addr, "");
+
+      promise.then(function(data) {
+
+        if (data.elections) {
+          var electData = {
+            elections: data.elections,
+            pollingLocations: data.pollingLocations,
+            contests: data.contests
+          };
+
+          $window.localStorage.electData = JSON.stringify(electData);
+        }
+        else {
+          console.log("No elections returned");
+          $window.localStorage.removeItem('electData');
+        }
+      });
 
 			//Go to home
 			$timeout(function(){$state.go('tab.home');}, 3000);
@@ -35,8 +56,6 @@ angular.module('starter.controllers', ['firebase'])
   }
 
 	$scope.submit = function() {
-		setUserName($scope.firstName, $scope.lastName);
-		setUserAddress($scope.address, $scope.city, $scope.state, $scope.zip);
 
 		var addr = $scope.address + ' ' + $scope.city + ' ' + $scope.state + ' ' + $scope.zip;
 
@@ -62,7 +81,25 @@ angular.module('starter.controllers', ['firebase'])
 
 				$window.localStorage.repData = JSON.stringify(repData);
 
-				$state.go('tab.home');
+        var promise2 = Query.getElectData(addr, "");
+
+        promise2.then(function(data2) {
+
+          if (data2.elections) {
+            var electData = {
+              elections: data2.elections,
+              pollingLocations: data2.pollingLocations,
+              contests: data2.contests
+            };
+
+            $window.localStorage.electData = JSON.stringify(electData);
+          }
+          else {
+            console.log("No elections returned");
+            $window.localStorage.removeItem('electData');
+          }
+          $state.go('tab.home');
+        });
 			}
 			else {
 				//Log error
@@ -215,33 +252,42 @@ angular.module('starter.controllers', ['firebase'])
     $state.go('welcome', { error: true });
   }
 
+  // Load user address
   var address = JSON.parse($window.localStorage['userData']).address;
-  $scope.userAddress = address.line1 + ', ' + address.city + ' ' + address.state + ', ' + address.zip;
+  $scope.userAddress = address.line1 + ', ' + address.city + ', ' + address.state + ' ' + address.zip;
 
-
-  if(false)
+  // Check if there are elections stored
+  var electData = false;
+  if($window.localStorage['electData']!=undefined)
   {
+    // Load election data
+    electData = JSON.parse($window.localStorage['electData']);
+
+    // Choose cards to display
     $scope.noElections = false;
     $scope.noMessage = true;
+
+    // Scope user polling place
+    var a = electData.pollingLocations[0].address;
+    $scope.pollingPlace = a.line1 + ', ' + a.city + ', ' + a.state + ' ' + a.zip;
+
+    // Scope elections
+    $scope.upcomingElections = electData.elections;
+
+    // Scope contests
+    $scope.contests = electData.contests; 
   }
   else
   {
+    // Chooses cards to display
     $scope.noElections = true;
     $scope.noMessage = false;
+
+    // Use map to display user address instead of polling address
+    $scope.pollingPlace = $scope.userAddress;
   }
 
-  // TODO: Brian; get polling place, upcoming elections with address
-  $scope.pollingPlace = "3104 Bluff St Madison Wisconsin 53705";
-  $scope.upcomingElections = [
-    { name: "2017 Spring Election",
-      date: "April 4, 2017",
-      ballot: 0 // Unique ID to pass as stateParam to find correct ballot
-    }, {
-      name: "2018 Spring Primary",
-      date: "February 4, 2017",
-      ballot: 1
-    }
-  ];
+
 
   $scope.nextElectionDate = new Date(2017, 4, 3).toLocaleDateString('en-US',
     { month: 'long',
@@ -352,7 +398,48 @@ angular.module('starter.controllers', ['firebase'])
 
         // Update elections page info
         $scope.userAddress = addr;
+        
         // TODO: Brian, put code for getting polling place here (should be same as when controller is initialized)
+        var promise2 = Query.getElectData(addr, "");
+
+        promise2.then(function(data) {
+
+          if (data.elections) {
+
+            console.log(data);
+
+            var electData = {
+              elections: data.elections,
+              pollingLocations: data.pollingLocations,
+              contests: data.contests
+            };
+
+            $window.localStorage.electData = JSON.stringify(electData);
+
+            // Choose cards to display
+            $scope.noElections = false;
+            $scope.noMessage = true;
+
+            // Scope user polling place
+            var a = electData.pollingLocations[0].address;
+            $scope.pollingPlace = a.line1 + ', ' + a.city + ', ' + a.state + ' ' + a.zip;
+
+            // Scope elections
+            $scope.upcomingElections = electData.elections;
+
+            // Scope contests
+            $scope.contests = electData.contests;
+          }
+          else {
+            // Chooses cards to display
+            $scope.noElections = true;
+            $scope.noMessage = false;
+
+            // Use map to display user address instead of polling address
+            $scope.pollingPlace = $scope.userAddress;
+          }
+          initialize();
+        });
 
         $scope.settingsModal.hide();
       } else {
@@ -361,11 +448,57 @@ angular.module('starter.controllers', ['firebase'])
         //Log error
         console.log("Invalid Address");
       }
-
       initialize();
     });
 
 	};
+
+  $scope.spoofData = function() {
+    
+    var addr = $scope.userAddress;
+
+    var p = Query.getElectData(addr, "&electionId=2000");
+
+        p.then(function(data) {
+
+          if (data.elections) {
+
+            var electData = {
+              elections: data.elections,
+              pollingLocations: data.pollingLocations,
+              contests: data.contests
+            };
+
+            $window.localStorage.electData = JSON.stringify(electData);
+
+            // Choose cards to display
+            $scope.noElections = false;
+            $scope.noMessage = true;
+
+            // Scope user polling place
+            var a = electData.pollingLocations[0].address;
+            $scope.pollingPlace = a.line1 + ', ' + a.city + ', ' + a.state + ' ' + a.zip;
+
+            // Scope elections
+            $scope.upcomingElections = electData.elections;
+
+            // Scope contests
+            $scope.contests = electData.contests;
+          }
+          else {
+
+            $window.localStorage.removeItem('electData');
+            
+            // Chooses cards to display
+            $scope.noElections = true;
+            $scope.noMessage = false;
+
+            // Use map to display user address instead of polling address
+            $scope.pollingPlace = $scope.userAddress;
+          }
+          initialize();
+        });
+  }
   // $scope.$on('$destroy', function() {
   //   $scope.modal.remove();
   // });
