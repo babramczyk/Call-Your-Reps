@@ -69,11 +69,14 @@ angular.module('starter.services', [])
         data.pollingLocations.push(raw.pollingLocations[j]);
       }
 
+      var list = [];
+
       // Add contests, skipping duplicates
       for (var k in raw.contests) {
-          //TODO
-          data.contests.push(raw.contests[j]);
-        
+          if((list.indexOf(raw.contests[k].office) < 0) && (raw.contests[k].office)) {
+            list.push(raw.contests[k].office);
+            data.contests.push(raw.contests[k]);
+          }
       }
 
       console.log(data);
