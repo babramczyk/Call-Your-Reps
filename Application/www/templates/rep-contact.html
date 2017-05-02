@@ -9,11 +9,36 @@
       <div class="clear-both"></div>
     </div>
     
-    <h3>Sample Script</h3>
-    <p>{{ script }}</p>
+    <div class="card">
+      <div class="item item-divider">
+        <span>Tips</span>
+      </div>
+      <div class="item item-text-wrap">
+        Telephone calls are often taken by a staff member. If so, tell them that you would like to leave a message for {{repName}}.
+      </div>
+      <div class="item item-text-wrap">
+        Don't just state your views, state your reasons.  And be specific about particular legislation that you have an opinion on.
+      </div>
+      <div class="item item-text-wrap">
+        If you'd like, you may also request a written respons to your call, but there's no guarantee you will get one.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        <span>Sample Scripts</span>
+      </div>
+      <div class="item item-text-wrap">
+        {{ script }}
+      </div>
+    </div>
     
-    <a href="tel:{{ phoneNumber }}" class="button button-balanced icon-left ion-ios-telephone center">{{phone}}</a>
-    <a href="mailto:{{ emailAddress }}" class="button button-positive icon-left ion-ios-email center">{{email}}</a>
+    <a href="tel:{{ phoneNumber }}" class="button button-balanced icon-left ion-ios-telephone center" style="width:100%">
+    {{phone}}
+    </a>
+    <a href="mailto:{{ emailAddress }}" class="button button-positive icon-left ion-ios-email center" style="width:100%">
+    {{email}}
+    </a>
     
   </ion-content>
 </ion-view>
