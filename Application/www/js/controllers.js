@@ -359,23 +359,6 @@ angular.module('starter.controllers', ['firebase'])
   // });
 })
 
-
-.controller('ActivityCtrl', function($state, $scope, $rootScope, $window) {
-
-
-
-
-  if (!validateLocalStorage($window)) {
-    $state.go('welcome', { error: true });
-  }
-
-  $scope.$on('$ionicView.enter', function() {
-    $scope.repData = JSON.parse($window.localStorage.repData);
-  })
-
-	console.log("Activity Screen Controller initialized");
-})
-
 .controller('FeedsCtrl', function($state, $scope, $ionicPlatform, $twitterApi, $cordovaOauth, $window, TwitterREST) {
 
     TwitterREST.sync().then(function(tweets) {
