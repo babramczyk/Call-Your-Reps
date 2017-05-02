@@ -376,9 +376,13 @@ angular.module('starter.controllers', ['firebase'])
 	console.log("Activity Screen Controller initialized");
 })
 
-.controller('FeedsCtrl', function($state, $scope, $ionicPlatform, $twitterApi, $cordovaOauth, $window, TwitterREST) {
+.controller('FeedsCtrl', function($state, $scope,$timeout, $ionicPlatform, $twitterApi,
+                                  $cordovaOauth, $window, tweetWidgets, TwitterREST) {
 
-    TwitterREST.sync().then(function(tweets) {
+  tweetWidgets.loadAllWidgets();
+  //$timeout(function () { twttr.widgets.load(); }, 500);
+
+  TwitterREST.sync().then(function(tweets) {
       console.log(tweets);
       $scope.tweets = tweets.statuses;
     });

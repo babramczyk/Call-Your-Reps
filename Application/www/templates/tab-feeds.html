@@ -1,8 +1,13 @@
 <ion-view view-title="Twitter Feed">
     <ion-content class="has-header padding">
-      <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
-      <p> This is a test </p>
+      <a class="twitter-timeline" data-lang="en" data-theme="light" data-link-color="#2B7BB9" href="https://twitter.com/katezellmer/lists/call-your-reps">A Twitter List by katezellmer</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+      <twitter-timeline>
+        <a class="twitter-timeline" href="https://twitter.com/katezellmer/lists/call-your-reps" data-widget-id="673710543212052480"> Tweets from Your Representatives</a>
+      </twitter-timeline>
+
+      <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
       <div ng-show="home_timeline.length == 0">Loading tweets...</div>
 
@@ -22,3 +27,4 @@
 
     </ion-content>
 </ion-view>
+

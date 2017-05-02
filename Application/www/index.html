@@ -34,6 +34,7 @@
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
     <script src="lib/ng-twitter-api/dist/ng-twitter-api.min.js"></script>
+    <script src="lib/ngtweet/dist/ngtweet.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -49,7 +50,7 @@
     <script src="js/services.js"></script>
     <script src="js/filters.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="starter" twitter-widget-initialize>
     <!--
       The nav bar that will be updated as we navigate between views.
     -->

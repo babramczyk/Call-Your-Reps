@@ -1,5 +1,26 @@
 angular.module('starter.services', [])
 
+.service('tweetWidgets', function() {
+
+  this.loadAllWidgets = function() {
+
+    /* widgets loader code you get when
+     * declaring you widget with Twitter
+     * this code is the same for all widgets
+     * so calling it once will reference whatever
+     * widgets are active in the current ng-view */
+
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  };
+
+  this.destroyAllWidgets = function() {
+    var $ = function (id) { return document.getElementById(id); };
+    var twitter = $('twitter-wjs');
+    if (twitter != null)
+      twitter.remove();
+  };
+})
+
 .factory('Query', function($http) {
 
 
@@ -143,7 +164,7 @@ angular.module('starter.services', [])
     var consumerKey = "IpU9pbmcDVVL82A21Soz4KPqc"; 
     var consumerSecret = "W8qOfUvY7dx73LpCtPo9r6D1eACSUMkyFDnmS1JYRf0LW4AYrv";
     var twitterTokenURL = "https://api.twitter.com/oauth2/781310648-qJ2awr3HpenmlrUgGLNyEHJeYtA3r18WWQITp0UM";
-    var twitterStreamURL = "https://api.twitter.com/1.1/search/tweets.json?q="; //url query, this one is for hash tags
+    var twitterStreamURL = "https://api.twitter.com/1.1/lists/statuses.json="; //url query, this one is for hash tags
     var qValue = "%23belgrade"; //hash tag %23 is for #
     var numberOfTweets = "&count=10";
 
