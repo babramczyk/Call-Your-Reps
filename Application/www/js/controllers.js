@@ -218,8 +218,20 @@ angular.module('starter.controllers', ['firebase'])
   var address = JSON.parse($window.localStorage['userData']).address;
   $scope.userAddress = address.line1 + ', ' + address.city + ' ' + address.state + ', ' + address.zip;
 
+
+  if(false)
+  {
+    $scope.noElections = false;
+    $scope.noMessage = true;
+  }
+  else
+  {
+    $scope.noElections = true;
+    $scope.noMessage = false;
+  }
+
   // TODO: Brian; get polling place, upcoming elections with address
-  $scope.pollingPlace = "306 N Brooks St, Madison, WI 53715";
+  $scope.pollingPlace = "3104 Bluff St Madison Wisconsin 53705";
   $scope.upcomingElections = [
     { name: "2017 Spring Election",
       date: "April 4, 2017",
