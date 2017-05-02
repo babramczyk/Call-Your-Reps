@@ -67,13 +67,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/tab-home.html',
           controller: 'HomeCtrl'
         }
-        // 'rep-contact': {
-        //   templateUrl: 'templates/rep-contact.html',
-        //   controller: 'RepContactCtrl'
-        // }, 'rep-info': {
-        //   templateUrl: 'templates/rep-info.html',
-        //   controller: 'RepInfoCtrl'
-        // }
       }
     })
 
@@ -105,16 +98,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'tab-elections': {
         templateUrl: 'templates/tab-elections.html',
         controller: 'ElectionsCtrl'
-      }
-    }
-  })
-
-  .state('tab.activity', {
-    url: '/activity',
-    views: {
-      'tab-activity': {
-        templateUrl: 'templates/tab-activity.html',
-        controller: 'ActivityCtrl'
       }
     }
   })
