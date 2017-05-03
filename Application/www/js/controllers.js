@@ -255,6 +255,10 @@ angular.module('starter.controllers', ['firebase'])
   // Load user address
   var address = JSON.parse($window.localStorage['userData']).address;
   $scope.userAddress = address.line1 + ', ' + address.city + ', ' + address.state + ' ' + address.zip;
+  $scope.cardAddress = address.line1;
+  $scope.cardCity = address.city;
+  $scope.cardState = address.state;
+  $scope.cardZip = address.zip;
 
   // Check if there are elections stored
   var electData = false;
@@ -268,8 +272,19 @@ angular.module('starter.controllers', ['firebase'])
     $scope.noMessage = true;
 
     // Scope user polling place
-    var a = electData.pollingLocations[0].address;
-    $scope.pollingPlace = a.line1 + ', ' + a.city + ', ' + a.state + ' ' + a.zip;
+    // TODO: Brian, getting "cannot read property 'address' of undefined for the below line here. Quick fix for now, where I hide the polling place card if it's not found, but wonder if it's a query issue.
+    if (electData.pollingLocations[0] != undefined) {
+      var a = electData.pollingLocations[0].address;
+      $scope.pollingPlace = a.line1 + ', ' + a.city + ', ' + a.state + ' ' + a.zip
+      $scope.pollingPlaceLine1 = a.line1;
+      $scope.pollingPlaceLine2 = a.city + ', ' + a.state + ' ' + a.zip;
+      $scope.noPollingPlace = false;
+    } else {
+      $scope.pollingPlace = '';
+      $scope.pollingPlaceLine1 = 'No polling place found!';
+      $scope.pollingPlaceLine2 = '';
+      $scope.noPollingPlace = true;
+    }
 
     // Scope elections
     $scope.upcomingElections = electData.elections;
@@ -281,10 +296,14 @@ angular.module('starter.controllers', ['firebase'])
   {
     // Chooses cards to display
     $scope.noElections = true;
+    $scope.noPollingPlace = true;
     $scope.noMessage = false;
 
     // Use map to display user address instead of polling address
-    $scope.pollingPlace = $scope.userAddress;
+    $scope.pollingPlace = '';
+    $scope.pollingPlaceLine1 = 'No polling place found!';
+    $scope.pollingPlaceLine2 = '';
+    $scope.noPollingPlace = true;
   }
 
 
@@ -314,6 +333,7 @@ angular.module('starter.controllers', ['firebase'])
   //geocode, to get coordinates from address and mark on map
   function geocodeAddress(geocoder, resultsMap) {
     var address = $scope.pollingPlace;//document.getElementbyId('address').value;
+    // var address = '1508 Adams St, Madison, WI 53711' // For debugging
     geocoder.geocode({'address': $scope.pollingPlace}, function(results, status) {
       if (status === 'OK') {
         resultsMap.setCenter(results[0].geometry.location);
@@ -330,6 +350,8 @@ angular.module('starter.controllers', ['firebase'])
         var infowindow = new google.maps.InfoWindow({
           content: compiled[0]
         });
+      } else {
+        $scope.noPollingPlace = true;
       }
     })
   }

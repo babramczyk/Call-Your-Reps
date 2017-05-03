@@ -1,64 +1,79 @@
-<ion-view view-title="Election Information" id="elections">
-  <ion-content class="padding">
-    <!---->
-    <!--<h3>Your next election is on {{ nextElectionDate }}.</h3>-->
-    <!---->
-    <!--<h3>Your polling place is located at {{ pollingPlace }}.</h3>-->
-    <!---->
-    <!--<button class="button button-positive button-large icon-left ion-android-list center">-->
-    <!--See a sample ballot-->
-    <!--</button>-->
-
-    <div class="card">
-      <div class="item item-divider">
-        <span>My Address</span>
-        <button class="button icon ion-gear-a float-right" ng-click="openSettings()"></button>
-      </div>
-      <div class="item item-text-wrap">
-        {{ userAddress }}
+<ion-view view-title="Election Information">
+  <ion-content class="padding" id="elections-page">
+  
+    <div class="card flex stable-transparent">
+      <div class="item item-text-wrap stable-transparent">
+      
+        <div class="left-middle">
+          <p class="title"><strong>My Address</strong>
+          <p class="sub-title">{{ cardAddress }}
+          <p class="sub-title">{{ cardCity }}, {{ cardState }} {{ cardZip }}
+        </div>
+      
+        <div class="right stable">
+          <button class="button button-royal icon ion-gear-a float-right" ng-click="openSettings()"></button>
+        </div>
+    
       </div>
     </div>
-
+  
+    <div class="card flex stable-transparent">
+      <div class="item item-text-wrap stable-transparent">
+        <div class="full middle">
+          <p class="title"><strong>My Polling Place</strong>
+          <p class="sub-title">{{ pollingPlaceLine1 }}
+          <p class="sub-title ng-hide" ng-hide="noPollingPlace">{{ pollingPlaceLine2 }}
+        </div>
+      </div>
+    </div>
+  
     <div id="map" data-tap-disabled="true"></div>
+    <!--<div id="map" data-tap-disabled="true" class="ng-hide" ng-hide="noPollingPlace"></div>-->
 
     <!-- Shows if there is election data -->
     <div ng-hide="noElections" class="ng-hide">
-      <div class="card">
-        <div class="item item-divider">
-          My Polling Place
-        </div>
-        <div class="item item-text-wrap">
-          {{ pollingPlace }}
-        </div>
-      </div>
-
-      
-
-      <div class="card">
+  
+      <div class="card flex stable-transparent">
         <div class="item item-divider">
           Upcoming Elections
         </div>
-        <div class="item item-text-wrap" ng-repeat="election in upcomingElections">
-          <p>{{ election.name }}</p>
-          <p>{{ election.electionDay }}</p>
+        
+        <div class="item item-text-wrap stable-transparent" ng-repeat="election in upcomingElections">
+          <div class="full middle">
+            <p class="title"><strong>{{ election.name }}<strong>
+            <p class="sub-title">{{ election.electionDay }}
+          </div>
         </div>
       </div>
-
-      <div class="card">
+      
+      <div class="card flex stable-transparent">
         <div class="item item-divider">
           Offices and Items up for Vote
         </div>
-        <div class="item item-text-wrap" ng-repeat="contest in contests">
-          <p>{{ contest.office }}</p>
+    
+        <div class="item item-text-wrap stable-transparent" ng-repeat="contest in contests">
+          <div class="full middle">
+            <p class="title"><strong>{{ contest.office }}</strong></p>
+            <p class="sub-title candidate" ng-repeat="candidate in contest.candidates">
+              ({{ candidate.party.charAt(0) }}) {{ candidate.name}}
+            </p>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Shows if there is no election data -->
     <div ng-hide="noMessage" class="ng-hide">
-      <div class="card">
-        <div class="item item-divider">Upcoming Elections</div>
-        <div class="item item-text-wrap">No upcoming elections found</div>
+      <div class="card flex stable-transparent">
+        <div class="item item-divider">
+          Upcoming Elections
+        </div>
+    
+        <div class="item item-text-wrap stable-transparent" ng-repeat="election in upcomingElections">
+          <div class="full middle">
+            <p class="sub-title">No elections found
+          </div>
+        </div>
       </div>
 
       <div align="center"><button class="button button-calm" ng-click="spoofData()">(TESTING) Generate election data</button><div>
