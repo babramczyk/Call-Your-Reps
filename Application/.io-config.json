@@ -1,1 +1,18 @@
-{"app_id":"7aa29339","api_key":"ddbc53561206af47f41c78ecf6fcacaead119fe2da1ec7b1"}
+{
+  "api_key":"ddbc53561206af47f41c78ecf6fcacaead119fe2da1ec7b1",
+  "name": "Call Your Reps",
+  "app_id": "543538ae",
+  "watch": {
+    "sass": [
+      "scss/**/*.scss"
+    ],
+    "html": [
+     "www/**/*.html"
+    ],
+    "livereload": [
+     "www/**/*.html",
+     "www/**/*.js",
+     "www/**/*.css"
+   ]
+ }
+}

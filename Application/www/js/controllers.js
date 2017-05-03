@@ -345,7 +345,7 @@ angular.module('starter.controllers', ['firebase'])
 	}).then(function(modal) {
  		$scope.settingsModal = modal;
  		$scope.errorMsg = "";
- 		$scope.header = "People move. We get it.";
+ 		$scope.header = "";
 	});
 
 	$scope.openSettings = function() {

@@ -78,6 +78,31 @@ h1, h2, h3, h4, h5, h6, p {
 //  font-size: 16px;
 //}
 
+
+/***** Welcome Page *****/
+
+#welcome-page {
+  h1 {
+    font-size: 75px;
+    font-weight: 100;
+    /* background-color: rgba(248, 248, 248, 0.86); */
+    /* color: #444; */
+    margin-bottom: 6% !important;
+  }
+
+  p {
+    margin-bottom: 4%;
+}
+
+  .button-submit {
+    margin-top: 6% !important;
+  }
+}
+
+/***** Modal *****/
+
+
+
 /***** Home Page *****/
 .button-contact {
   margin-bottom: 10px;
