@@ -47,6 +47,11 @@ angular.module('starter.services', [])
           // Add office title to holder (Redundant but nice to have)
           newHolder.officeName = raw.offices[i].name;
 
+          // Format phone number
+          if(newHolder.phones) {
+            newHolder.phones[0] = formatPhoneNumber(newHolder.phones[0]);
+          }
+
           newOffice.holders.push(newHolder);
 
           // For each channel of that office holder, add their twitter if they have it
