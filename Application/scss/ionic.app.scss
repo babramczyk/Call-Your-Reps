@@ -96,7 +96,11 @@ h1, h2, h3 {
 
 /***** Modal *****/
 
-
+#settings-modal {
+  h1 {
+    color: $dark;
+  }
+}
 
 /***** Home Page *****/
 

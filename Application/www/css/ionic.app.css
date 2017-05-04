@@ -9894,6 +9894,9 @@ h1, h2, h3 {
   margin-top: 6% !important; }
 
 /***** Modal *****/
+#settings-modal h1 {
+  color: #444; }
+
 /***** Home Page *****/
 .card.flex .item {
   display: flex;
