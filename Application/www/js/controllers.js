@@ -32,12 +32,12 @@ angular.module('starter.controllers', ['firebase'])
       });
 
 			//Go to home
-			// $timeout(function(){$state.go('tab.home');}, 3000);
+			$timeout(function(){$state.go('tab.home');}, 3000);
 		}
 		// Else, go to welcome to get user data
 		else {
 			//console.log("No Available Load Data");
-			// $timeout(function(){$state.go('welcome');}, 3000);
+			$timeout(function(){$state.go('welcome');}, 3000);
 		}
 
 	//}
@@ -243,10 +243,10 @@ angular.module('starter.controllers', ['firebase'])
   	//TODO: Add support for back button?
   	$scope.web = "Visit Reps Website";
   	$scope.website = rep.urls[0];
-  	$scope.noWebsite = false;
+  	$scope.noWeb = false;
   }
   else {
-  	$scope.noWebsite = true;
+  	$scope.noWeb = true;
   }
 
   // TODO: Bio sourcing
