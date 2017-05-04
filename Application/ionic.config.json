@@ -1,6 +1,6 @@
 {
   "name": "Call Your Reps",
-  "app_id": "29e49f5c",
+  "app_id": "",
   "watch": {
     "sass": [
       "scss/**/*.scss"
