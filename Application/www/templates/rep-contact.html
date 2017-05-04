@@ -14,20 +14,29 @@
         </div>
     
       </div>
+
+    <div class="header-wrap">
+      <img src="{{ imgSrc }}" class="rep-photo"/>
+      <h1>{{ repName }}</h1>
+      <div class="clear-both"></div>
     </div>
-    
+
     <div class="card">
       <div class="item item-divider">
         <span>Tips</span>
       </div>
       <div class="item item-text-wrap">
-        Telephone calls are often taken by a staff member. If so, tell them that you would like to leave a message for {{repName}}.
+        Give your name, city, and zip code, and say "I don't need a response".
+        This way they can tally you down without having to take time to issue a response.
       </div>
       <div class="item item-text-wrap">
-        Don't just state your views, state your reasons.  And be specific about particular legislation that you have an opinion on.
+        State the issue, state your position. For example- "I am opposed to a ban on Muslims entering the US".
+        That's it. Staffers will write down a tally of who is in favor,
+        so it doesn't matter WHY you hold that opinion.
       </div>
       <div class="item item-text-wrap">
-        If you'd like, you may also request a written response to your call, but there's no guarantee you will get one.
+        Be nice! The people answering the phones have some of the hardest jobs in Washington, and have some of the lowest pay as well.
+        Be sure to thank them for their work.
       </div>
     </div>
 
@@ -51,5 +60,13 @@
     
     <div class="footer-placeholder"></div>
     
+
+    <a href="tel:{{ phoneNumber }}" class="button button-balanced icon-left ion-ios-telephone center" style="width:100%">
+    {{phone}}
+    </a>
+    <a href="mailto:{{ emailAddress }}" class="button button-positive icon-left ion-ios-email center" style="width:100%">
+    {{email}}
+    </a>
+
   </ion-content>
 </ion-view>

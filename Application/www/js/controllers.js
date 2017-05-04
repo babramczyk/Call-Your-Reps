@@ -9,7 +9,7 @@ angular.module('starter.controllers', ['firebase'])
 		if(validateLocalStorage($window)) {
 
       var address = JSON.parse($window.localStorage['userData']).address;
-      var addr = address.line1 + ', ' + address.city + ', ' + address.state + ' ' + address.zip; 
+      var addr = address.line1 + ', ' + address.city + ', ' + address.state + ' ' + address.zip;
 
 			//TODO: Update election data (sometimes update repData? Only if election data changes?)
       var promise = Query.getElectData(addr, "");
@@ -103,7 +103,10 @@ angular.module('starter.controllers', ['firebase'])
 			}
 			else {
 				//Log error
-				console.log("Invalid Address");
+        $scope.header = "Uh-oh!";
+        $scope.message = "Something went wrong with your information. Please enter your full name and a valid US address to continue."
+        $state.go('tab-home')
+        console.log("Invalid Address");
 			}
 		});
 	}
@@ -151,6 +154,11 @@ angular.module('starter.controllers', ['firebase'])
 
 
   // Fill in defaults
+  $scope.phone = "Call";
+  $scope.email = "Email";
+  $scope.zip = JSON.parse($window.localStorage.userData).address.zip;
+  $scope.city = JSON.parse($window.localStorage.userData).address.city;
+  console.log($window.localStorage.userData);
   $scope.userName = JSON.parse($window.localStorage.userData).firstName + ' ' + JSON.parse($window.localStorage.userData).lastName;
 
   // Fill rep info
@@ -178,8 +186,9 @@ angular.module('starter.controllers', ['firebase'])
   	$scope.noEmail = true;
   }
 
-
-  $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.repName + "'s district. I was hoping to speak with them today about their recent activity and policies."; // TODO: Change script eventually
+  $scope.script = "Hello, my name is " + $scope.userName + " and I am a constituent from " + $scope.city+ ", zip code "
+    +$scope.zip + ". I don't need a response. I am in favor of supporting the Affordable Care Act, and I encourage  "
+  + $scope.repName + " to support it as well. Thank you for your hard work answering the phone!";
 })
 
 
@@ -292,7 +301,7 @@ angular.module('starter.controllers', ['firebase'])
     $scope.upcomingElections = electData.elections;
 
     // Scope contests
-    $scope.contests = electData.contests; 
+    $scope.contests = electData.contests;
   }
   else
   {
@@ -422,7 +431,7 @@ angular.module('starter.controllers', ['firebase'])
 
         // Update elections page info
         $scope.userAddress = addr;
-        
+
         // TODO: Brian, put code for getting polling place here (should be same as when controller is initialized)
         var promise2 = Query.getElectData(addr, "");
 
@@ -478,7 +487,7 @@ angular.module('starter.controllers', ['firebase'])
 	};
 
   $scope.spoofData = function() {
-    
+
     var addr = $scope.userAddress;
 
     var p = Query.getElectData(addr, "&electionId=2000");
@@ -512,7 +521,7 @@ angular.module('starter.controllers', ['firebase'])
           else {
 
             $window.localStorage.removeItem('electData');
-            
+
             // Chooses cards to display
             $scope.noElections = true;
             $scope.noMessage = false;
