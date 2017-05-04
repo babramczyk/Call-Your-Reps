@@ -77,7 +77,6 @@ angular.module('starter.services', [])
 
       var data = {};
       var raw = res.data;
-      console.log(raw);
       data.elections = [];
       data.pollingLocations = [];
       data.contests = [];
@@ -104,7 +103,6 @@ angular.module('starter.services', [])
             data.contests.push(raw.contests[k]);
           }
       }
-      console.log(data);
 
       return data;
     }, function(err){

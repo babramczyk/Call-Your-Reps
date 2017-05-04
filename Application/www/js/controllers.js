@@ -287,7 +287,7 @@ angular.module('starter.controllers', ['firebase'])
       $scope.pollingPlaceLine2 = a.city + ', ' + a.state + ' ' + a.zip;
       $scope.noPollingPlace = false;
     } else {
-      $scope.pollingPlace = '';
+      $scope.pollingPlace = $scope.userAddress;
       $scope.pollingPlaceLine1 = 'No polling place found!';
       $scope.pollingPlaceLine2 = '';
       $scope.noPollingPlace = true;
@@ -307,7 +307,7 @@ angular.module('starter.controllers', ['firebase'])
     $scope.noMessage = false;
 
     // Use map to display user address instead of polling address
-    $scope.pollingPlace = '';
+    $scope.pollingPlace = $scope.userAddress;
     $scope.pollingPlaceLine1 = 'No polling place found!';
     $scope.pollingPlaceLine2 = '';
     $scope.noPollingPlace = true;
@@ -379,7 +379,7 @@ angular.module('starter.controllers', ['firebase'])
 
 	$scope.openSettings = function() {
 	  var userData = JSON.parse($window.localStorage.userData);
-	  console.log(userData);
+	  //console.log(userData);
 
     $scope.firstName = userData.firstName;
     $scope.lastName = userData.lastName;
@@ -427,14 +427,16 @@ angular.module('starter.controllers', ['firebase'])
 
         // Update elections page info
         $scope.userAddress = addr;
+        $scope.cardAddress = address.line1;
+        $scope.cardCity = address.city;
+        $scope.cardState = address.state;
+        $scope.cardZip = address.zip;
 
         var promise2 = Query.getElectData(addr, "");
 
         promise2.then(function(data) {
 
           if (data.elections) {
-
-            console.log(data);
 
             var electData = {
               elections: data.elections,
@@ -449,8 +451,18 @@ angular.module('starter.controllers', ['firebase'])
             $scope.noMessage = true;
 
             // Scope user polling place
-            var a = electData.pollingLocations[0].address;
-            $scope.pollingPlace = a.line1 + ', ' + a.city + ', ' + a.state + ' ' + a.zip;
+            if (electData.pollingLocations[0] != undefined) {
+              var a = electData.pollingLocations[0].address;
+              $scope.pollingPlace = a.line1 + ', ' + a.city + ', ' + a.state + ' ' + a.zip
+              $scope.pollingPlaceLine1 = a.line1;
+              $scope.pollingPlaceLine2 = a.city + ', ' + a.state + ' ' + a.zip;
+              $scope.noPollingPlace = false;
+            } else {
+              $scope.pollingPlace = $scope.userAddress;
+              $scope.pollingPlaceLine1 = 'No polling place found!';
+              $scope.pollingPlaceLine2 = '';
+              $scope.noPollingPlace = true;
+            }
 
             // Scope elections
             $scope.upcomingElections = electData.elections;
@@ -459,6 +471,9 @@ angular.module('starter.controllers', ['firebase'])
             $scope.contests = electData.contests;
           }
           else {
+            // Remove any old data
+            $window.localStorage.removeItem('electData');
+
             // Chooses cards to display
             $scope.noElections = true;
             $scope.noMessage = false;
@@ -504,8 +519,18 @@ angular.module('starter.controllers', ['firebase'])
             $scope.noMessage = true;
 
             // Scope user polling place
-            var a = electData.pollingLocations[0].address;
-            $scope.pollingPlace = a.line1 + ', ' + a.city + ', ' + a.state + ' ' + a.zip;
+            if (electData.pollingLocations[0] != undefined) {
+              var a = electData.pollingLocations[0].address;
+              $scope.pollingPlace = a.line1 + ', ' + a.city + ', ' + a.state + ' ' + a.zip
+              $scope.pollingPlaceLine1 = a.line1;
+              $scope.pollingPlaceLine2 = a.city + ', ' + a.state + ' ' + a.zip;
+              $scope.noPollingPlace = false;
+            } else {
+              $scope.pollingPlace = $scope.userAddress;
+              $scope.pollingPlaceLine1 = 'No polling place found!';
+              $scope.pollingPlaceLine2 = '';
+              $scope.noPollingPlace = true;
+            }
 
             // Scope elections
             $scope.upcomingElections = electData.elections;
