@@ -9869,12 +9869,12 @@ ion-content {
 h1, h2, h3, h4, h5, h6, p {
   color: #f8f8f8; }
 
+h1, h2, h3 {
+  font-weight: 100; }
+
 /***** Welcome Page *****/
 #welcome-page h1 {
   font-size: 75px;
-  font-weight: 100;
-  /* background-color: rgba(248, 248, 248, 0.86); */
-  /* color: #444; */
   margin-bottom: 6% !important; }
 
 #welcome-page p {
@@ -9948,6 +9948,25 @@ h1, h2, h3, h4, h5, h6, p {
 
 .button {
   min-width: 43px; }
+
+/***** Rep-Info Page *****/
+#rep-info-page img {
+  width: 100%; }
+
+#rep-info-page .header {
+  display: flex;
+  justify-content: space-between; }
+  #rep-info-page .header .left {
+    flex-basis: 35%;
+    display: block; }
+  #rep-info-page .header .middle {
+    flex-basis: 60%; }
+
+#rep-info-page h1 {
+  font-weight: 300; }
+
+#rep-info-page .button-contact {
+  margin-bottom: 10%; }
 
 .rep-photo {
   float: left;

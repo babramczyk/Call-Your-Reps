@@ -192,7 +192,7 @@ angular.module('starter.controllers', ['firebase'])
   // stateParam will be a rep data object with appropriate fields
   var rep = $stateParams.rep;
 
-  if (rep.name == undefined) {
+  if (rep == undefined || rep.name == undefined) {
     $ionicNavBarDelegate.showBackButton(false);
     $ionicViewSwitcher.nextDirection('back');
     $state.go('tab.home');
@@ -234,7 +234,7 @@ angular.module('starter.controllers', ['firebase'])
   else {
   	$scope.address = "No Address Listed";
   }
-  if(rep.urls[0]) {
+  if(rep.urls) {
   	//TODO: Add support for back button?
   	$scope.web = "Visit Reps Website";
   	$scope.website = rep.urls[0];
@@ -243,7 +243,10 @@ angular.module('starter.controllers', ['firebase'])
   	//TODO: Make button unavailable
   	$scope.web = "No Website Listed";
   }
+
+  // TODO: Bio sourcing
   $scope.bio = "TODO: Find a bio source?";
+  $scope.noBio = true;
 })
 
 
