@@ -76,12 +76,36 @@ h1, h2, h3 {
   font-weight: 100;
 }
 
+/***** Splash page *****/
+
+#splash-page {
+  h1 {
+    font-size: 16vw;
+    margin-bottom: 6% !important;
+  }
+
+  p {
+    font-size: 5vw;
+    line-height: 5vw;
+  }
+
+  .logo {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
 
 /***** Welcome Page *****/
 
 #welcome-page {
   h1 {
-    font-size: 75px;
+    font-size: 22vw;
     margin-bottom: 6% !important;
   }
 

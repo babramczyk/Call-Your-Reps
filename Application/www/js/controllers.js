@@ -32,12 +32,12 @@ angular.module('starter.controllers', ['firebase'])
       });
 
 			//Go to home
-			$timeout(function(){$state.go('tab.home');}, 3000);
+			// $timeout(function(){$state.go('tab.home');}, 3000);
 		}
 		// Else, go to welcome to get user data
 		else {
 			//console.log("No Available Load Data");
-			$timeout(function(){$state.go('welcome');}, 3000);
+			// $timeout(function(){$state.go('welcome');}, 3000);
 		}
 
 	//}
