@@ -180,7 +180,7 @@ angular.module('starter.controllers', ['firebase'])
   }
 
 
-  $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.repName + "'s district. I was hoping to them today about their recent activity and policies."; // TODO: Change script eventually
+  $scope.script = "Hello, my name is " + $scope.userName + " and I am in representative " + $scope.repName + "'s district. I was hoping to speak with them today about their recent activity and policies."; // TODO: Change script eventually
 })
 
 
