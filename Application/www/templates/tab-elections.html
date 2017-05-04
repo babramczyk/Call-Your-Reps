@@ -19,18 +19,21 @@
       </div>
     </div>
   
-    <div class="card flex stable-transparent">
-      <div class="item item-text-wrap stable-transparent">
-        <div class="full middle">
-          <p class="title"><strong>My Polling Place</strong>
-          <p class="sub-title">{{ pollingPlaceLine1 }}
-          <p class="sub-title ng-hide" ng-hide="noPollingPlace">{{ pollingPlaceLine2 }}
+    <!-- Shows if there is election data -->
+    <div ng-hide="noElections" class="ng-hide">
+      <div class="card flex stable-transparent">
+        <div class="item item-text-wrap stable-transparent">
+          <div class="full middle">
+            <p class="title"><strong>My Polling Place</strong>
+            <p class="sub-title">{{ pollingPlaceLine1 }}
+            <p class="sub-title ng-hide" ng-hide="noPollingPlace">{{ pollingPlaceLine2 }}</p>
+          </div>
         </div>
       </div>
     </div>
   
     <!--<div id="map" data-tap-disabled="true"></div>-->
-    <div id="map" data-tap-disabled="true" class="ng-hide" ng-hide="noPollingPlace"></div>
+    <div id="map" data-tap-disabled="true"></div>
 
     <!-- Shows if there is election data -->
     <div ng-hide="noElections" class="ng-hide">
@@ -71,9 +74,9 @@
           Upcoming Elections
         </div>
     
-        <div class="item item-text-wrap stable-transparent" ng-repeat="election in upcomingElections">
+        <div class="item item-text-wrap stable-transparent">
           <div class="full middle">
-            <p class="sub-title">No elections found
+            <p class="sub-title">No upcoming elections
           </div>
         </div>
       </div>
