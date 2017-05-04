@@ -9854,6 +9854,11 @@ a.center {
 .width-15 {
   width: 15%; }
 
+.footer-placeholder {
+  width: 1px;
+  height: 60px;
+  clear: both; }
+
 ion-content {
   background-color: #4E3A57; }
 
@@ -9893,7 +9898,7 @@ h1, h2, h3 {
 .card.flex .left {
   flex-basis: 15%;
   font-size: 30px;
-  border-radius: 4px;
+  border-radius: 8%;
   display: flex;
   align-self: center;
   min-height: 50px; }
@@ -9950,33 +9955,38 @@ h1, h2, h3 {
   min-width: 43px; }
 
 /***** Rep-Info Page *****/
-#rep-info-page img {
+#rep-info-page img, #rep-contact-page img {
   width: 100%; }
 
-#rep-info-page .header {
+#rep-info-page .header, #rep-contact-page .header {
   display: flex;
   justify-content: space-between; }
-  #rep-info-page .header .left {
+  #rep-info-page .header .left, #rep-contact-page .header .left {
     flex-basis: 35%;
     display: block; }
-  #rep-info-page .header .middle {
+  #rep-info-page .header .middle, #rep-contact-page .header .middle {
     flex-basis: 60%; }
 
-#rep-info-page h1 {
+#rep-info-page h1, #rep-contact-page h1 {
   font-weight: 300; }
 
-#rep-info-page .button-contact {
+#rep-info-page .button-contact, #rep-contact-page .button-contact {
   margin-bottom: 10%; }
 
 .rep-photo {
-  float: left;
-  width: 25%;
-  margin-right: 35px;
-  border-radius: 1000px;
-  max-width: 300px; }
+  border-radius: 8%; }
 
-.header-wrap {
-  margin-bottom: 2%; }
+/***** Rep-Contact Page *****/
+#rep-contact-page .buttons.flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center; }
+  #rep-contact-page .buttons.flex .call {
+    flex-basis: 45%;
+    max-width: 400px; }
+  #rep-contact-page .buttons.flex .email {
+    flex-basis: 45%;
+    max-width: 400px; }
 
 #map {
   margin: auto;

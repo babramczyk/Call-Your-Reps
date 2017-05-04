@@ -1,13 +1,11 @@
 <ion-view view-title="{{ repName }}" id="rep-info-page">
   <ion-content class="padding">
-    
-    <!--TODO: Styling changes-->
   
     <div class="card rep-card stable-transparent flex">
       <div class="item item-text-wrap stable-transparent header">
       
         <div class="left">
-          <img src="{{ imgSrc }}" />
+          <img src="{{ imgSrc }}" class="rep-photo" />
         </div>
       
         <div class="middle">
@@ -28,6 +26,8 @@
       <h1 align="center">Biography</h1>
       <p>{{ bio }}</p>
     </div>
+    
+    <div class="footer-placeholder"></div>
   
   </ion-content>
 </ion-view>

@@ -151,12 +151,11 @@ angular.module('starter.controllers', ['firebase'])
 
 
   // Fill in defaults
-  $scope.phone = "Call";
-  $scope.email = "Email";
   $scope.userName = JSON.parse($window.localStorage.userData).firstName + ' ' + JSON.parse($window.localStorage.userData).lastName;
 
   // Fill rep info
   $scope.repName = rep.name;
+  $scope.office = rep.officeName;
   if(rep.photoUrl) {
   	$scope.imgSrc = rep.photoUrl;
   }
@@ -166,17 +165,17 @@ angular.module('starter.controllers', ['firebase'])
   }
   if(rep.phones) {
     $scope.phoneNumber = rep.phones[0];
+    $scope.noPhone = false;
   }
   else {
-  	// TODO: Make button unavailable
-  	$scope.phone = "NO PHONE LISTED";
+  	$scope.noPhone = true;
   }
   if(rep.emails) {
   	$scope.emailAddress = rep.emails[0];
+  	$scope.noEmail = false;
   }
   else {
-  	// TODO: Make button unavailable
-  	$scope.email = "NO EMAIL LISTED";
+  	$scope.noEmail = true;
   }
 
 

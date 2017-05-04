@@ -1,10 +1,19 @@
 <ion-view view-title="Contact" id="rep-contact-page">
   <ion-content class="padding">
+  
+    <div class="card rep-card stable-transparent flex">
+      <div class="item item-text-wrap stable-transparent header">
+      
+        <div class="left">
+          <img src="{{ imgSrc }}" class="rep-photo"/>
+        </div>
+      
+        <div class="middle">
+          <p class="title"><strong>{{ repName }}</strong>
+          <p class="sub-title">{{ office.toUpperCase() }}
+        </div>
     
-    <div class="header-wrap">
-      <img src="{{ imgSrc }}" class="rep-photo"/>
-      <h1>{{ repName }}</h1>
-      <div class="clear-both"></div>
+      </div>
     </div>
     
     <div class="card">
@@ -31,12 +40,16 @@
       </div>
     </div>
     
-    <a href="tel:{{ phoneNumber }}" class="button button-balanced icon-left ion-ios-telephone center" style="width:100%">
-    {{phone}}
-    </a>
-    <a href="mailto:{{ emailAddress }}" class="button button-positive icon-left ion-ios-email center" style="width:100%">
-    {{email}}
-    </a>
+    <div class="buttons flex">
+      <a href="tel:{{ phoneNumber }}" class="button button-energized button-large icon-left ion-ios-telephone call ng-hide" ng-hide="noPhone">
+        Call
+      </a>
+      <a href="mailto:{{ emailAddress }}" class="button button-calm button-large icon-left ion-ios-email email ng-hide" ng-hide="noEmail">
+        Email
+      </a>
+    </div>
+    
+    <div class="footer-placeholder"></div>
     
   </ion-content>
 </ion-view>
