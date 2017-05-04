@@ -45,6 +45,7 @@ a.center { display: table !important; }
 .width-50 { width: 50%; }
 .width-15 { width: 15%; }
 .footer-placeholder { width: 1px; height: 60px; clear: both; }
+.header-place { width: 1px; height: 20px; }
 
 ion-content {
   background-color: $royal;
@@ -52,6 +53,7 @@ ion-content {
 
 .tab-nav {
   background-color: $stable;
+  border-top: 1px solid $calm !important;
 
   //.tab-item {
   //  color: $stable;
@@ -225,6 +227,14 @@ h1, h2, h3 {
   border-radius: 8%;
 }
 
+#rep-contact-page .sub-title {
+  margin-bottom: -25px;
+}
+
+#rep-info-page .sub-title {
+  margin-bottom: -40px;
+}
+
 
 /***** Rep-Contact Page *****/
 #rep-contact-page {
@@ -243,6 +253,8 @@ h1, h2, h3 {
       max-width: 400px;
     }
   }
+
+
 }
 
 

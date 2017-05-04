@@ -11,6 +11,12 @@
         <div class="middle">
           <p class="title"><strong>{{ repName }}</strong>
           <p class="sub-title">{{ office.toUpperCase() }}
+  
+          <div class="buttons flex">
+          <a href="tel:{{ phoneNumber }}" class="button button-energized icon ion-ios-telephone call ng-hide" ng-hide="noPhone"></a>
+          <a href="mailto:{{ emailAddress }}" class="button button-calm icon ion-ios-email email ng-hide" ng-hide="noEmail"></a>
+          <div class="email ng-hide" ng-hide="!noEmail"></div>
+          </div>
         </div>
     
       </div>
@@ -38,15 +44,6 @@
       <div class="item item-text-wrap">
         {{ script }}
       </div>
-    </div>
-    
-    <div class="buttons flex">
-      <a href="tel:{{ phoneNumber }}" class="button button-energized button-large icon-left ion-ios-telephone call ng-hide" ng-hide="noPhone">
-        Call
-      </a>
-      <a href="mailto:{{ emailAddress }}" class="button button-calm button-large icon-left ion-ios-email email ng-hide" ng-hide="noEmail">
-        Email
-      </a>
     </div>
     
     <div class="footer-placeholder"></div>

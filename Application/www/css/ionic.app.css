@@ -9859,11 +9859,16 @@ a.center {
   height: 60px;
   clear: both; }
 
+.header-place {
+  width: 1px;
+  height: 20px; }
+
 ion-content {
   background-color: #4E3A57; }
 
 .tab-nav {
-  background-color: #f8f8f8; }
+  background-color: #f8f8f8;
+  border-top: 1px solid #279B9C !important; }
 
 .bar.bar-header {
   background-color: rgba(100, 100, 100, 0.1); }
@@ -9975,6 +9980,12 @@ h1, h2, h3 {
 
 .rep-photo {
   border-radius: 8%; }
+
+#rep-contact-page .sub-title {
+  margin-bottom: -25px; }
+
+#rep-info-page .sub-title {
+  margin-bottom: -40px; }
 
 /***** Rep-Contact Page *****/
 #rep-contact-page .buttons.flex {

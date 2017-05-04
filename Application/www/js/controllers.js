@@ -160,7 +160,6 @@ angular.module('starter.controllers', ['firebase'])
   	$scope.imgSrc = rep.photoUrl;
   }
   else {
-  	// TODO: Use generic silhouette
   	$scope.imgSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Man_silhouette.svg/703px-Man_silhouette.svg.png'
   }
   if(rep.phones) {
@@ -203,7 +202,6 @@ angular.module('starter.controllers', ['firebase'])
   	$scope.imgSrc = rep.photoUrl;
   }
   else {
-  	// TODO: Use generic silhouette
   	$scope.imgSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Man_silhouette.svg/703px-Man_silhouette.svg.png'
   }
 
@@ -234,17 +232,14 @@ angular.module('starter.controllers', ['firebase'])
   	$scope.address = "No Address Listed";
   }
   if(rep.urls) {
-  	//TODO: Add support for back button?
-  	$scope.web = "Visit Reps Website";
   	$scope.website = rep.urls[0];
+  	$scope.noWebsite = false;
   }
   else {
-  	//TODO: Make button unavailable
-  	$scope.web = "No Website Listed";
+  	$scope.noWebsite = true;
   }
 
   // TODO: Bio sourcing
-  $scope.bio = "TODO: Find a bio source?";
   $scope.noBio = true;
 })
 
@@ -422,8 +417,7 @@ angular.module('starter.controllers', ['firebase'])
 
         // Update elections page info
         $scope.userAddress = addr;
-        
-        // TODO: Brian, put code for getting polling place here (should be same as when controller is initialized)
+
         var promise2 = Query.getElectData(addr, "");
 
         promise2.then(function(data) {
