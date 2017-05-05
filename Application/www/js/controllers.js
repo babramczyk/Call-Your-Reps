@@ -313,7 +313,7 @@ angular.module('starter.controllers', ['firebase'])
     $scope.noPollingPlace = true;
   }
 
-
+  initialize();
 
   $scope.nextElectionDate = new Date(2017, 4, 3).toLocaleDateString('en-US',
     { month: 'long',
